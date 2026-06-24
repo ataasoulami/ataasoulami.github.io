@@ -219,28 +219,55 @@
 
     /* Promise */
     .promise-block {
-      background: var(--orange);
-      border-radius: 16px;
-      padding: 24px 28px;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF8C42 100%);
+      border-radius: 20px;
+      padding: 40px 32px;
       margin-bottom: 40px;
-      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
+      box-shadow: 0 12px 32px rgba(249, 115, 22, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promise-block::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: shimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, 20px); }
+    }
+
+    .promise-block > * {
+      position: relative;
+      z-index: 1;
     }
 
     .promise-block .section-title {
-      color: var(--black);
-      font-size: 18px;
-      margin-bottom: 10px;
+      color: var(--white);
+      font-size: 22px;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
     }
 
     .promise-block p {
-      color: white;
-      font-size: 17px;
+      color: var(--white);
+      font-size: 18px;
       font-weight: 500;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     .promise-block p strong {
-      color: var(--black);
+      background: rgba(255,255,255,0.25);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 700;
     }
 
     /* Description */
@@ -493,8 +520,8 @@
     .back { animation: fadeUp 0.4s ease both; }
     .header { animation: fadeUp 0.4s ease 0.05s both; }
     .stats-bar { animation: fadeUp 0.4s ease 0.1s both; }
-    .video-wrap { animation: fadeUp 0.4s ease 0.15s both; }
-    .promise-block { animation: fadeUp 0.4s ease 0.2s both; }
+    .promise-block { animation: fadeUp 0.4s ease 0.15s both; }
+    .video-wrap { animation: fadeUp 0.4s ease 0.2s both; }
     .description { animation: fadeUp 0.4s ease 0.25s both; }
     .cta-section { animation: fadeUp 0.4s ease 0.3s both; }
     .cedar-block { animation: fadeUp 0.4s ease 0.35s both; }
@@ -565,6 +592,11 @@
       </div>
     </div>
 
+    <div class="promise-block">
+      <div class="section-title">Notre promesse</div>
+      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
+    </div>
+
     <div class="video-wrap">
       <iframe
         src="https://www.youtube.com/embed/V22pq8RcS9s"
@@ -572,11 +604,6 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
-    </div>
-
-    <div class="promise-block">
-      <div class="section-title">Notre promesse</div>
-      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
     </div>
 
     <div class="description">
