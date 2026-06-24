@@ -318,44 +318,12 @@
     </div>
 
     <!-- Form -->
-    <form class="form-section" id="webinarForm">
-      <div class="form-title">Réservez votre place</div>
-
-      <div class="webinar-date">
-        📅 Lundi 29 juin à 20h00 (heure de Casablanca)
-      </div>
-
-      <div class="form-group">
-        <label for="firstName">Prénom</label>
-        <input type="text" id="firstName" name="firstName" placeholder="Entrez votre prénom" required />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Adresse e-mail</label>
-        <input type="email" id="email" name="email" placeholder="votre@email.com" required />
-      </div>
-
-      <button type="submit" class="cta-btn">Réservez ma place gratuite</button>
-
-      <p class="form-microcopy">100% gratuit. Places limitées.</p>
-    </form>
+    <div class="form-section">
+      <iframe data-tally-src="https://tally.so/embed/7RjrLL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" width="100%" height="100%" style="border: none; border-radius: 12px;"></iframe>
+    </div>
 
   </div>
 
-  <script>
-    document.getElementById('webinarForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const firstName = document.getElementById('firstName').value.trim();
-      const email = document.getElementById('email').value.trim();
-
-      if (!firstName || !email) {
-        alert('Veuillez remplir tous les champs.');
-        return;
-      }
-
-      alert(`Merci ${firstName}! Vous allez recevoir un e-mail de confirmation à ${email}.`);
-      this.reset();
-    });
-  </script>
+  <script src="https://tally.so/widgets/embed.js"></script>
 </body>
 </html>
