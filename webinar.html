@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webinaire Gratuit : Apprenez à Investir de Zéro — Ataa Soulami</title>
+  <link rel="icon" type="image/png" href="MVI.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x80yu0fxl0");
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F97316;
+      --orange-dark: #EA580C;
+      --black: #0F0F0F;
+      --white: #FFFFFF;
+      --gray: #6B7280;
+      --gray-light: #F9FAFB;
+      --border: #E5E7EB;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    /* Headline section */
+    .hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: center;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 6vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: var(--black);
+    }
+
+    .subheadline {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--gray);
+      max-width: 520px;
+    }
+
+    /* Photo */
+    .photo-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--orange);
+      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.2);
+      flex-shrink: 0;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Benefits */
+    .benefits {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .benefit-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 15px;
+      line-height: 1.65;
+      color: #374151;
+    }
+
+    .benefit-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Promise */
+    .promise {
+      background: var(--gray-light);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border-left: 4px solid var(--orange);
+      width: 100%;
+    }
+
+    .promise p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    /* Form */
+    .form-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      background: var(--gray-light);
+      border-radius: 16px;
+      padding: 40px 28px;
+    }
+
+    .form-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      color: var(--black);
+    }
+
+    .webinar-date {
+      text-align: center;
+      font-size: 14px;
+      color: var(--gray);
+      font-weight: 600;
+      padding: 12px 16px;
+      background: var(--white);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 0.2px;
+    }
+
+    input {
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--black);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    }
+
+    input::placeholder {
+      color: #D1D5DB;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 28px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .cta-btn:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+    }
+
+    .form-microcopy {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero { animation: fadeUp 0.5s ease both; }
+    .photo-wrap { animation: fadeUp 0.5s ease 0.1s both; }
+    .benefits { animation: fadeUp 0.5s ease 0.2s both; }
+    .promise { animation: fadeUp 0.5s ease 0.3s both; }
+    .form-section { animation: fadeUp 0.5s ease 0.4s both; }
+
+    /* Mobile */
+    @media (max-width: 480px) {
+      body {
+        padding: 24px 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .container {
+        gap: 32px;
+      }
+
+      .photo-wrap {
+        width: 120px;
+        height: 120px;
+      }
+
+      .form-section {
+        padding: 32px 20px;
+      }
+
+      .cta-btn {
+        padding: 14px 24px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Headline & Photo -->
+    <div class="hero">
+      <h1>Apprenez à investir de zéro — même si vous n'y connaissez absolument rien.</h1>
+
+      <div class="photo-wrap">
+        <img src="photo.png" alt="Ataa Soulami" />
+      </div>
+
+      <p class="subheadline">Webinaire gratuit et en direct. En une heure, repartez avec un plan clair pour faire vos premiers investissements — sans expérience, sans gros budget, et sans jargon compliqué.</p>
+    </div>
+
+    <!-- Benefits -->
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">✓</div>
+        <span>Pourquoi il est important d'investir.</span>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">✓</div>
+        <span>Comment commencer à investir dès cette semaine, même avec un petit montant.</span>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">✓</div>
+        <span>Les erreurs de débutant qui coûtent cher — et comment les éviter.</span>
+      </div>
+    </div>
+
+    <!-- Promise -->
+    <div class="promise">
+      <p>Vous n'avez pas besoin d'être riche pour investir. Vous avez besoin de commencer — et de savoir comment. C'est exactement ce que je vais vous montrer.</p>
+    </div>
+
+    <!-- Form -->
+    <form class="form-section" id="webinarForm">
+      <div class="form-title">Réservez votre place</div>
+
+      <div class="webinar-date">
+        📅 Lundi 29 juin à 20h00 (heure de Casablanca)
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">Prénom</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Entrez votre prénom" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+      </div>
+
+      <button type="submit" class="cta-btn">Réservez ma place gratuite</button>
+
+      <p class="form-microcopy">100% gratuit. Places limitées.</p>
+    </form>
+
+  </div>
+
+  <script>
+    document.getElementById('webinarForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const firstName = document.getElementById('firstName').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if (!firstName || !email) {
+        alert('Veuillez remplir tous les champs.');
+        return;
+      }
+
+      alert(`Merci ${firstName}! Vous allez recevoir un e-mail de confirmation à ${email}.`);
+      this.reset();
+    });
+  </script>
+</body>
+</html>
