@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Webinaire Gratuit : Apprenez à Investir de Zéro — Ataa Soulami</title>
   <link rel="icon" type="image/png" href="MVI.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -30,11 +30,12 @@
     html {
       scroll-behavior: smooth;
       height: 100%;
+      scroll-padding-top: var(--banner-height);
     }
 
     body {
       margin: 0;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Montserrat', 'DM Sans', sans-serif;
       background: radial-gradient(circle at top, rgba(249,115,22,0.16), transparent 32%), var(--white);
       color: var(--black);
       min-height: 100vh;
@@ -59,6 +60,9 @@
       align-items: center;
       justify-content: center;
       letter-spacing: 0.4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
 
@@ -71,9 +75,9 @@
 
     main {
       width: 100%;
-      max-width: 600px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: calc(var(--banner-height, 56px) + 16px) 24px 32px;
+      padding: calc(var(--banner-height, 56px) + 24px) 24px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -82,23 +86,29 @@
 
     /* Headline section */
     .hero {
-      text-align: center;
+      text-align: left;
       display: flex;
-      flex-direction: column;
-      gap: 22px;
+      flex-direction: row;
       align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: nowrap;
     }
 
     .hero-copy {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 18px;
-      max-width: 520px;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 100%;
     }
 
     h1 {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', 'Poppins', sans-serif;
       font-size: clamp(34px, 7vw, 52px);
       font-weight: 800;
       line-height: 1.05;
@@ -106,6 +116,10 @@
       color: var(--black);
       max-width: 520px;
       text-shadow: 0 14px 36px rgba(249, 115, 22, 0.08);
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     @media (min-width: 760px) {
@@ -316,21 +330,31 @@
     /* Mobile */
     @media (max-width: 480px) {
       main {
-        padding: calc(var(--banner-height, 56px) + env(safe-area-inset-top, 0px) + 12px) 20px 28px;
-        gap: 32px;
+        padding: calc(var(--banner-height, 56px) + env(safe-area-inset-top, 0px) + 16px) 16px 28px;
+        gap: 28px;
+      }
+
+      .hero {
+        gap: 16px;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
       }
 
       h1 {
-        font-size: 28px;
+        font-size: 26px;
+      }
+
+      .hero-copy {
+        min-width: 0;
       }
 
       .photo-wrap {
-        width: 120px;
-        height: 120px;
+        width: 96px;
+        height: 96px;
       }
 
       .form-section {
-        padding: 32px 20px;
+        padding: 28px 18px;
       }
 
       .cta-btn {
@@ -348,12 +372,12 @@
 
     <!-- Headline & Photo -->
     <div class="hero">
-      <div class="hero-copy">
-        <h1>Investissez mieux, plus vite.</h1>
-      </div>
-
       <div class="photo-wrap">
         <img src="photo.png" alt="Ataa Soulami" />
+      </div>
+
+      <div class="hero-copy">
+        <h1>Masterclass Investissement en Bourse</h1>
       </div>
     </div>
 
