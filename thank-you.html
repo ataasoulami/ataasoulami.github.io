@@ -170,6 +170,44 @@
       top: 0;
     }
 
+    .whatsapp-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .whatsapp-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray);
+    }
+
+    .whatsapp-logo {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .whatsapp-link {
+      color: #25D366;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .whatsapp-link:hover {
+      opacity: 0.8;
+    }
+
     @media (max-width: 600px) {
       main {
         padding: calc(var(--banner-height, 56px) + 32px) 20px 32px;
@@ -206,6 +244,13 @@
       <p class="message" style="margin-top: 16px; color: var(--gray);">
         À bientôt ! 🚀
       </p>
+
+      <div class="whatsapp-section">
+        <div class="whatsapp-contact">
+          <span class="whatsapp-logo">💬</span>
+          <span>En cas de problème, écrivez-nous sur <a href="https://wa.me/212645089425" class="whatsapp-link">WhatsApp au +212645089425</a> pour confirmer votre inscription</span>
+        </div>
+      </div>
     </div>
   </main>
 </body>
