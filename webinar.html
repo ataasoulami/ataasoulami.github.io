@@ -24,6 +24,7 @@
       --gray: #6B7280;
       --gray-light: #F9FAFB;
       --border: #E5E7EB;
+      --banner-height: 56px;
     }
 
     html {
@@ -72,7 +73,7 @@
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      padding: calc(var(--banner-height) + 18px) 24px 32px;
+      padding: calc(var(--banner-height, 56px) + 16px) 24px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -315,7 +316,7 @@
     /* Mobile */
     @media (max-width: 480px) {
       main {
-        padding: calc(var(--banner-height) + env(safe-area-inset-top, 0px) + 12px) 20px 28px;
+        padding: calc(var(--banner-height, 56px) + env(safe-area-inset-top, 0px) + 12px) 20px 28px;
         gap: 32px;
       }
 
@@ -341,7 +342,7 @@
 </head>
 <body>
   <header class="page-header">
-    <span>29 juin · 20h00 heure de Casablanca · Webinaire GRATUIT</span>
+    <span>29 juin · 20h00 Casa · Webinaire GRATUIT</span>
   </header>
   <main>
 
