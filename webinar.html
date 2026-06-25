@@ -40,14 +40,14 @@
     }
 
     .page-header {
-      --banner-height: 100px;
+      --banner-height: 72px;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 9999;
       width: 100vw;
-      padding: 20px 24px;
+      padding: 14px 24px;
       min-height: var(--banner-height);
       background: linear-gradient(90deg, rgba(255,133,47,1) 0%, rgba(241,97,16,1) 100%);
       color: var(--white);
@@ -56,7 +56,7 @@
       font-weight: 700;
       text-align: center;
       letter-spacing: 0.4px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
     }
 
     .page-header span {
@@ -74,7 +74,7 @@
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
-      padding: calc(var(--banner-height) + env(safe-area-inset-top, 16px) + 16px) 24px 32px;
+      padding: calc(var(--banner-height) + env(safe-area-inset-top, 16px) + 12px) 24px 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,29 +101,6 @@
       text-shadow: 0 14px 36px rgba(249, 115, 22, 0.08);
     }
 
-    .scroll-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 28px;
-      background: linear-gradient(90deg, #FFFFFF, #FFF7EF);
-      color: var(--orange-dark);
-      border: 2px solid rgba(249, 115, 22, 0.25);
-      border-radius: 999px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
-      text-decoration: none;
-      box-shadow: 0 12px 30px rgba(249, 115, 22, 0.12);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-
-    .scroll-btn:hover {
-      transform: translateY(-2px);
-      background: #fff;
-      box-shadow: 0 16px 34px rgba(249, 115, 22, 0.18);
-    }
 
     .photo-wrap {
       position: relative;
@@ -155,55 +132,6 @@
     }
 
     /* Promise */
-    .webinar-banner {
-      --banner-height: 96px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      width: 100%;
-      padding: 18px 24px;
-      min-height: var(--banner-height);
-      border-radius: 0;
-      background: linear-gradient(90deg, rgba(249,115,22,1) 0%, rgba(234,88,12,1) 100%);
-      color: var(--white);
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      text-align: center;
-      letter-spacing: 0.4px;
-      box-shadow: 0 8px 24px rgba(249, 115, 22, 0.18);
-    }
-
-    .webinar-banner span {
-      display: block;
-      opacity: 0.95;
-    }
-
-    .photo-wrap {
-      position: relative;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid var(--orange);
-      box-shadow: 0 10px 28px rgba(249, 115, 22, 0.22);
-      flex-shrink: 0;
-      background: #fff;
-    }
-
-    .photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
-      display: block;
-      transform: none;
-      background: #fff;
-    }
-
-    /* Benefits */
     .benefits {
       width: 100%;
       display: flex;
@@ -394,17 +322,14 @@
 
     <!-- Headline & Photo -->
     <div class="hero">
-      <h1>Investissez mieux, plus vite, sans prise de tête.</h1>
-
-      <a class="scroll-btn" href="#signup">Je m'inscris</a>
+      <h1>Investissez mieux, plus vite.</h1>
 
       <div class="photo-wrap">
         <img src="photo.png" alt="Ataa Soulami" />
       </div>
     </div>
 
-    <!-- Promise -->
-    <div class="promise">
+    <!-- Promise -->    <div class="promise">
       <p>Vous n'avez pas besoin d'être riche pour investir. Vous avez besoin de commencer — et de savoir comment. C'est exactement ce que je vais vous montrer.</p>
     </div>
 
