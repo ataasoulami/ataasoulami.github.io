@@ -90,6 +90,14 @@
       align-items: center;
     }
 
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      max-width: 520px;
+    }
+
     h1 {
       font-family: 'Poppins', sans-serif;
       font-size: clamp(34px, 7vw, 52px);
@@ -99,6 +107,25 @@
       color: var(--black);
       max-width: 520px;
       text-shadow: 0 14px 36px rgba(249, 115, 22, 0.08);
+    }
+
+    @media (min-width: 760px) {
+      .hero {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        text-align: left;
+      }
+
+      .hero-copy {
+        align-items: flex-start;
+      }
+
+      .photo-wrap {
+        width: 180px;
+        height: 180px;
+      }
     }
 
 
@@ -322,7 +349,9 @@
 
     <!-- Headline & Photo -->
     <div class="hero">
-      <h1>Investissez mieux, plus vite.</h1>
+      <div class="hero-copy">
+        <h1>Investissez mieux, plus vite.</h1>
+      </div>
 
       <div class="photo-wrap">
         <img src="photo.png" alt="Ataa Soulami" />
