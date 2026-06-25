@@ -157,16 +157,17 @@
       font-size: 14px;
       line-height: 1.6;
       color: var(--gray);
-      padding: 8px 0;
-      display: flex;
-      gap: 8px;
+      padding: 8px 0 8px 24px;
+      position: relative;
     }
 
     .instructions li::before {
       content: "✓";
       color: var(--orange);
       font-weight: 700;
-      flex-shrink: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
 
     @media (max-width: 600px) {
