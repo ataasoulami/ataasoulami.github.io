@@ -26,6 +26,9 @@
     h1 { margin: 0; font-size: 22px; }
     .summary { display: flex; gap: 24px; font-size: 14px; color: #555; }
     .summary b { font-size: 18px; color: #1d1d1f; display: block; }
+    .status { font-size: 12px; color: #666; margin-top: 6px; }
+    .status.live { color: #1a9e57; }
+    .status.fallback { color: #b7791f; }
     main { padding: 24px 32px; max-width: 1000px; margin: 0 auto; }
     .add-account {
       background: #fff;
@@ -126,7 +129,10 @@
 </head>
 <body>
   <header>
-    <h1>Social Media Tracker</h1>
+    <div>
+      <h1>Social Media Tracker</h1>
+      <div id="status" class="status">Connecting to tracker API…</div>
+    </div>
     <div id="summary" class="summary"></div>
   </header>
 
@@ -170,6 +176,7 @@
   <script>
     const accountsEl = document.getElementById("accounts");
     const summaryEl = document.getElementById("summary");
+    const statusEl = document.getElementById("status");
     const accountForm = document.getElementById("account-form");
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
@@ -182,11 +189,10 @@
     let chartInstance = null;
     let accounts = [];
     let snapshots = {};
+    let usingLiveApi = false;
 
-    // LocalStorage keys
     const ACCOUNTS_KEY = "smTracker_accounts";
     const SNAPSHOTS_KEY = "smTracker_snapshots";
-
     const DEFAULT_DATA = {
       accounts: [
         { id: 1, platform: "instagram", handle: "@ataasoulami", created_at: "2026-06-16" },
@@ -224,17 +230,33 @@
       }
     };
 
-    // Initialize data from localStorage or preload the latest saved recordings
+    const API_BASE = (window.TRACKER_API_BASE_URL || "").trim().replace(/\/$/, "") ||
+      (window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost"
+        ? "http://127.0.0.1:8000"
+        : window.location.origin);
+
+    function setStatus(message, isLive) {
+      statusEl.textContent = message;
+      statusEl.className = `status ${isLive ? "live" : "fallback"}`;
+    }
+
+    function fmt(n) {
+      return n === null || n === undefined ? "--" : n.toLocaleString();
+    }
+
+    function saveData() {
+      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
+      localStorage.setItem(SNAPSHOTS_KEY, JSON.stringify(snapshots));
+    }
+
     function initData() {
       const storedAccounts = localStorage.getItem(ACCOUNTS_KEY);
       const storedSnapshots = localStorage.getItem(SNAPSHOTS_KEY);
-
       if (storedAccounts && storedSnapshots) {
         accounts = JSON.parse(storedAccounts);
         snapshots = JSON.parse(storedSnapshots);
         return;
       }
-
       accounts = DEFAULT_DATA.accounts.map((acc) => ({ ...acc }));
       snapshots = Object.fromEntries(
         Object.entries(DEFAULT_DATA.snapshots).map(([id, entries]) => [id, entries.map((entry) => ({ ...entry }))])
@@ -242,21 +264,50 @@
       saveData();
     }
 
-    // Save data to localStorage
-    function saveData() {
-      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-      localStorage.setItem(SNAPSHOTS_KEY, JSON.stringify(snapshots));
+    async function requestJson(path, options = {}) {
+      const response = await fetch(`${API_BASE}${path}`, {
+        headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+        ...options,
+      });
+      const text = await response.text();
+      let data = {};
+      try { data = text ? JSON.parse(text) : {}; } catch { data = { message: text }; }
+      if (!response.ok) {
+        throw new Error(data.error || data.message || "Request failed");
+      }
+      return data;
     }
 
-    function fmt(n) {
-      return n === null || n === undefined ? "--" : n.toLocaleString();
+    async function loadFromApi() {
+      try {
+        const serverAccounts = await requestJson("/api/accounts");
+        accounts = serverAccounts.map((acc) => ({
+          id: acc.id,
+          platform: acc.platform,
+          handle: acc.handle,
+          created_at: acc.created_at,
+        }));
+        snapshots = {};
+        for (const acc of accounts) {
+          const rows = await requestJson(`/api/accounts/${acc.id}/snapshots`);
+          snapshots[acc.id] = rows;
+        }
+        saveData();
+        usingLiveApi = true;
+        setStatus("Live syncing with tracker API", true);
+        refresh();
+      } catch (err) {
+        usingLiveApi = false;
+        setStatus("Using local browser fallback. Set TRACKER_API_BASE_URL to a live backend URL to sync online.", false);
+        initData();
+        refresh();
+      }
     }
 
     function loadSummary() {
       let total = 0;
       let total_delta = 0;
-
-      accounts.forEach(acc => {
+      accounts.forEach((acc) => {
         const accSnapshots = snapshots[acc.id] || [];
         if (accSnapshots.length > 0) {
           total += accSnapshots[accSnapshots.length - 1].follower_count;
@@ -265,7 +316,6 @@
           }
         }
       });
-
       summaryEl.innerHTML = `
         <div><b>${fmt(total)}</b>Total followers</div>
         <div><b>${accounts.length}</b>Accounts tracked</div>
@@ -292,14 +342,11 @@
         accountsEl.innerHTML = '<p class="account-empty">No accounts yet. Add one above.</p>';
         return;
       }
-
       accounts.forEach((acc) => {
         const accSnapshots = snapshots[acc.id] || [];
         const latest = accSnapshots.length > 0 ? accSnapshots[accSnapshots.length - 1] : null;
         const previous = accSnapshots.length > 1 ? accSnapshots[accSnapshots.length - 2] : null;
-
         const delta = latest && previous ? latest.follower_count - previous.follower_count : null;
-
         const card = document.createElement("div");
         card.className = "account-card";
         card.innerHTML = `
@@ -319,13 +366,19 @@
         });
         accountsEl.appendChild(card);
       });
-
       document.querySelectorAll(".delete-btn").forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           e.stopPropagation();
           if (!confirm("Remove this account and all its history?")) return;
-          const id = parseInt(btn.dataset.id);
-          accounts = accounts.filter(a => a.id !== id);
+          const id = parseInt(btn.dataset.id, 10);
+          try {
+            if (usingLiveApi) {
+              await requestJson(`/api/accounts/${id}`, { method: "DELETE" });
+            }
+          } catch (err) {
+            console.warn(err);
+          }
+          accounts = accounts.filter((a) => a.id !== id);
           delete snapshots[id];
           saveData();
           refresh();
@@ -338,21 +391,34 @@
       loadSummary();
     }
 
-    accountForm.addEventListener("submit", (e) => {
+    accountForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const platform = document.getElementById("platform").value;
       const handle = document.getElementById("handle").value.trim();
       if (!platform || !handle) return;
-
-      const id = Date.now();
-      accounts.push({
-        id,
-        platform,
-        handle,
-        created_at: new Date().toISOString().split('T')[0]
-      });
-      snapshots[id] = [];
-      saveData();
+      try {
+        if (usingLiveApi) {
+          const created = await requestJson("/api/accounts", {
+            method: "POST",
+            body: JSON.stringify({ platform, handle }),
+          });
+          accounts.push({
+            id: created.id,
+            platform: created.platform,
+            handle: created.handle,
+            created_at: created.created_at,
+          });
+          snapshots[created.id] = [];
+          saveData();
+        } else {
+          const id = Date.now();
+          accounts.push({ id, platform, handle, created_at: new Date().toISOString().split("T")[0] });
+          snapshots[id] = [];
+          saveData();
+        }
+      } catch (err) {
+        console.warn(err);
+      }
       accountForm.reset();
       refresh();
     });
@@ -380,68 +446,55 @@
       }
     });
 
-    snapshotForm.addEventListener("submit", (e) => {
+    snapshotForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!activeAccountId) return;
       const follower_count = parseInt(followerCountInput.value, 10);
       const recorded_at = recordedDateInput.value || new Date().toISOString().slice(0, 10);
-      if (isNaN(follower_count) || follower_count < 0) return;
-
-      if (!snapshots[activeAccountId]) {
-        snapshots[activeAccountId] = [];
+      if (Number.isNaN(follower_count) || follower_count < 0) return;
+      try {
+        if (usingLiveApi) {
+          await requestJson(`/api/accounts/${activeAccountId}/snapshots`, {
+            method: "POST",
+            body: JSON.stringify({ follower_count, recorded_at }),
+          });
+          const rows = await requestJson(`/api/accounts/${activeAccountId}/snapshots`);
+          snapshots[activeAccountId] = rows;
+        } else {
+          if (!snapshots[activeAccountId]) snapshots[activeAccountId] = [];
+          const existingIndex = snapshots[activeAccountId].findIndex((s) => s.recorded_at === recorded_at);
+          if (existingIndex >= 0) {
+            snapshots[activeAccountId][existingIndex].follower_count = follower_count;
+          } else {
+            snapshots[activeAccountId].push({ follower_count, recorded_at });
+          }
+          snapshots[activeAccountId].sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
+        }
+        saveData();
+        renderChart(activeAccountId);
+        refresh();
+      } catch (err) {
+        console.warn(err);
       }
-
-      // Check if snapshot for this date already exists
-      const existingIndex = snapshots[activeAccountId].findIndex(s => s.recorded_at === recorded_at);
-      if (existingIndex >= 0) {
-        snapshots[activeAccountId][existingIndex].follower_count = follower_count;
-      } else {
-        snapshots[activeAccountId].push({ follower_count, recorded_at });
-      }
-
-      // Sort by date
-      snapshots[activeAccountId].sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
-
-      saveData();
-      renderChart(activeAccountId);
-      refresh();
     });
 
     function renderChart(accountId) {
       const accSnapshots = snapshots[accountId] || [];
       const labels = accSnapshots.map((s) => s.recorded_at);
       const data = accSnapshots.map((s) => s.follower_count);
-
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+      if (chartInstance) chartInstance.destroy();
       const ctx = document.getElementById("chart").getContext("2d");
       chartInstance = new Chart(ctx, {
         type: "line",
         data: {
           labels,
-          datasets: [
-            {
-              label: "Followers",
-              data,
-              borderColor: "#2d6cdf",
-              backgroundColor: "rgba(45,108,223,0.1)",
-              tension: 0.25,
-              fill: true,
-            },
-          ],
+          datasets: [{ label: "Followers", data, borderColor: "#2d6cdf", backgroundColor: "rgba(45,108,223,0.1)", tension: 0.25, fill: true }],
         },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: false } },
-        },
+        options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } },
       });
     }
 
-    // Initialize on load
-    initData();
-    refresh();
+    loadFromApi();
   </script>
 </body>
 </html>
