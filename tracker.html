@@ -187,13 +187,59 @@
     const ACCOUNTS_KEY = "smTracker_accounts";
     const SNAPSHOTS_KEY = "smTracker_snapshots";
 
-    // Initialize data from localStorage
-    function initData() {
-      const stored = localStorage.getItem(ACCOUNTS_KEY);
-      accounts = stored ? JSON.parse(stored) : [];
+    const DEFAULT_DATA = {
+      accounts: [
+        { id: 1, platform: "instagram", handle: "@ataasoulami", created_at: "2026-06-16" },
+        { id: 2, platform: "tiktok", handle: "@ataasoulami", created_at: "2026-06-16" },
+        { id: 3, platform: "youtube", handle: "@ataasoulami", created_at: "2026-06-16" },
+        { id: 4, platform: "linkedin", handle: "@ataasoulami", created_at: "2026-06-16" },
+        { id: 5, platform: "facebook", handle: "@ataasoulami", created_at: "2026-06-16" }
+      ],
+      snapshots: {
+        1: [
+          { recorded_at: "2026-06-16", follower_count: 116000 },
+          { recorded_at: "2026-06-24", follower_count: 117000 },
+          { recorded_at: "2026-06-30", follower_count: 118000 }
+        ],
+        2: [
+          { recorded_at: "2026-06-16", follower_count: 32400 },
+          { recorded_at: "2026-06-24", follower_count: 32400 },
+          { recorded_at: "2026-06-30", follower_count: 32400 }
+        ],
+        3: [
+          { recorded_at: "2026-06-16", follower_count: 13600 },
+          { recorded_at: "2026-06-24", follower_count: 14100 },
+          { recorded_at: "2026-06-30", follower_count: 14300 }
+        ],
+        4: [
+          { recorded_at: "2026-06-16", follower_count: 6000 },
+          { recorded_at: "2026-06-24", follower_count: 6095 },
+          { recorded_at: "2026-06-30", follower_count: 6147 }
+        ],
+        5: [
+          { recorded_at: "2026-06-16", follower_count: 28000 },
+          { recorded_at: "2026-06-24", follower_count: 28000 },
+          { recorded_at: "2026-06-30", follower_count: 29000 }
+        ]
+      }
+    };
 
-      const snapshotsStored = localStorage.getItem(SNAPSHOTS_KEY);
-      snapshots = snapshotsStored ? JSON.parse(snapshotsStored) : {};
+    // Initialize data from localStorage or preload the latest saved recordings
+    function initData() {
+      const storedAccounts = localStorage.getItem(ACCOUNTS_KEY);
+      const storedSnapshots = localStorage.getItem(SNAPSHOTS_KEY);
+
+      if (storedAccounts && storedSnapshots) {
+        accounts = JSON.parse(storedAccounts);
+        snapshots = JSON.parse(storedSnapshots);
+        return;
+      }
+
+      accounts = DEFAULT_DATA.accounts.map((acc) => ({ ...acc }));
+      snapshots = Object.fromEntries(
+        Object.entries(DEFAULT_DATA.snapshots).map(([id, entries]) => [id, entries.map((entry) => ({ ...entry }))])
+      );
+      saveData();
     }
 
     // Save data to localStorage
