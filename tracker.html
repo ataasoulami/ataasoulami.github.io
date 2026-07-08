@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f4f5f7;
+      color: #1d1d1f;
+    }
+    header {
+      background: #fff;
+      padding: 24px 32px;
+      border-bottom: 1px solid #e2e2e2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    h1 { margin: 0; font-size: 22px; }
+    .summary { display: flex; gap: 24px; font-size: 14px; color: #555; }
+    .summary b { font-size: 18px; color: #1d1d1f; display: block; }
+    main { padding: 24px 32px; max-width: 1000px; margin: 0 auto; }
+    .add-account {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border: 1px solid #e2e2e2;
+    }
+    .add-account h2 { margin-top: 0; font-size: 16px; }
+    #account-form { display: flex; gap: 10px; flex-wrap: wrap; }
+    select, input, button {
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      background: #2d6cdf;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background: #1f54b3; }
+    .accounts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .account-card {
+      background: #fff;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      padding: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+    .account-card:hover { border-color: #2d6cdf; }
+    .platform-badge {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #eef2fb;
+      color: #2d6cdf;
+      margin-bottom: 8px;
+    }
+    .account-handle { font-weight: 600; margin-bottom: 4px; }
+    .account-count { font-size: 26px; font-weight: 700; }
+    .account-delta { font-size: 13px; }
+    .delta-up { color: #1a9e57; }
+    .delta-down { color: #d23b3b; }
+    .delta-flat { color: #888; }
+    .account-empty { color: #999; font-size: 13px; }
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      color: #bbb;
+      font-size: 16px;
+      padding: 0 4px;
+      border: none;
+      cursor: pointer;
+    }
+    .delete-btn:hover { color: #d23b3b; }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.hidden { display: none; }
+    .modal-content {
+      background: #fff;
+      border-radius: 10px;
+      padding: 24px;
+      width: 90%;
+      max-width: 520px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      color: #999;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .modal-close:hover { color: #333; }
+    #snapshot-form { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Social Media Tracker</h1>
+    <div id="summary" class="summary"></div>
+  </header>
+
+  <main>
+    <section class="add-account">
+      <h2>Add Account</h2>
+      <form id="account-form">
+        <select id="platform" required>
+          <option value="" disabled selected>Platform</option>
+          <option value="instagram">Instagram</option>
+          <option value="tiktok">TikTok</option>
+          <option value="youtube">YouTube</option>
+          <option value="linkedin">LinkedIn</option>
+          <option value="facebook">Facebook</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="text" id="handle" placeholder="@handle or channel name" required>
+        <button type="submit">Add</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Accounts</h2>
+      <div id="accounts" class="accounts-grid"></div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close">&times;</button>
+      <h2 id="modal-title"></h2>
+      <canvas id="chart" height="200"></canvas>
+      <form id="snapshot-form">
+        <input type="number" id="follower-count" min="0" placeholder="Follower count" required>
+        <input type="date" id="recorded-date">
+        <button type="submit">Log</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const accountsEl = document.getElementById("accounts");
+    const summaryEl = document.getElementById("summary");
+    const accountForm = document.getElementById("account-form");
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalClose = document.getElementById("modal-close");
+    const snapshotForm = document.getElementById("snapshot-form");
+    const followerCountInput = document.getElementById("follower-count");
+    const recordedDateInput = document.getElementById("recorded-date");
+
+    let activeAccountId = null;
+    let chartInstance = null;
+    let accounts = [];
+    let snapshots = {};
+
+    // LocalStorage keys
+    const ACCOUNTS_KEY = "smTracker_accounts";
+    const SNAPSHOTS_KEY = "smTracker_snapshots";
+
+    // Initialize data from localStorage
+    function initData() {
+      const stored = localStorage.getItem(ACCOUNTS_KEY);
+      accounts = stored ? JSON.parse(stored) : [];
+
+      const snapshotsStored = localStorage.getItem(SNAPSHOTS_KEY);
+      snapshots = snapshotsStored ? JSON.parse(snapshotsStored) : {};
+    }
+
+    // Save data to localStorage
+    function saveData() {
+      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
+      localStorage.setItem(SNAPSHOTS_KEY, JSON.stringify(snapshots));
+    }
+
+    function fmt(n) {
+      return n === null || n === undefined ? "--" : n.toLocaleString();
+    }
+
+    function loadSummary() {
+      let total = 0;
+      let total_delta = 0;
+
+      accounts.forEach(acc => {
+        const accSnapshots = snapshots[acc.id] || [];
+        if (accSnapshots.length > 0) {
+          total += accSnapshots[accSnapshots.length - 1].follower_count;
+          if (accSnapshots.length > 1) {
+            total_delta += accSnapshots[accSnapshots.length - 1].follower_count - accSnapshots[accSnapshots.length - 2].follower_count;
+          }
+        }
+      });
+
+      summaryEl.innerHTML = `
+        <div><b>${fmt(total)}</b>Total followers</div>
+        <div><b>${accounts.length}</b>Accounts tracked</div>
+        <div><b>${total_delta >= 0 ? "+" : ""}${fmt(total_delta)}</b>Change since last log</div>
+      `;
+    }
+
+    function deltaClass(delta) {
+      if (delta === null || delta === undefined) return "delta-flat";
+      if (delta > 0) return "delta-up";
+      if (delta < 0) return "delta-down";
+      return "delta-flat";
+    }
+
+    function deltaText(delta) {
+      if (delta === null || delta === undefined) return "";
+      if (delta === 0) return "no change";
+      return `${delta > 0 ? "+" : ""}${delta.toLocaleString()} since last log`;
+    }
+
+    function loadAccounts() {
+      accountsEl.innerHTML = "";
+      if (accounts.length === 0) {
+        accountsEl.innerHTML = '<p class="account-empty">No accounts yet. Add one above.</p>';
+        return;
+      }
+
+      accounts.forEach((acc) => {
+        const accSnapshots = snapshots[acc.id] || [];
+        const latest = accSnapshots.length > 0 ? accSnapshots[accSnapshots.length - 1] : null;
+        const previous = accSnapshots.length > 1 ? accSnapshots[accSnapshots.length - 2] : null;
+
+        const delta = latest && previous ? latest.follower_count - previous.follower_count : null;
+
+        const card = document.createElement("div");
+        card.className = "account-card";
+        card.innerHTML = `
+          <button class="delete-btn" data-id="${acc.id}" title="Remove account">&times;</button>
+          <div class="platform-badge">${acc.platform}</div>
+          <div class="account-handle">${acc.handle}</div>
+          ${
+            latest
+              ? `<div class="account-count">${fmt(latest.follower_count)}</div>
+                 <div class="account-delta ${deltaClass(delta)}">${deltaText(delta)}</div>`
+              : '<div class="account-empty">No data logged yet</div>'
+          }
+        `;
+        card.addEventListener("click", (e) => {
+          if (e.target.classList.contains("delete-btn")) return;
+          openModal(acc);
+        });
+        accountsEl.appendChild(card);
+      });
+
+      document.querySelectorAll(".delete-btn").forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          e.stopPropagation();
+          if (!confirm("Remove this account and all its history?")) return;
+          const id = parseInt(btn.dataset.id);
+          accounts = accounts.filter(a => a.id !== id);
+          delete snapshots[id];
+          saveData();
+          refresh();
+        });
+      });
+    }
+
+    function refresh() {
+      loadAccounts();
+      loadSummary();
+    }
+
+    accountForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const platform = document.getElementById("platform").value;
+      const handle = document.getElementById("handle").value.trim();
+      if (!platform || !handle) return;
+
+      const id = Date.now();
+      accounts.push({
+        id,
+        platform,
+        handle,
+        created_at: new Date().toISOString().split('T')[0]
+      });
+      snapshots[id] = [];
+      saveData();
+      accountForm.reset();
+      refresh();
+    });
+
+    function openModal(acc) {
+      activeAccountId = acc.id;
+      modalTitle.textContent = `${acc.platform} — ${acc.handle}`;
+      const accSnapshots = snapshots[acc.id] || [];
+      const latest = accSnapshots.length > 0 ? accSnapshots[accSnapshots.length - 1] : null;
+      followerCountInput.value = latest ? latest.follower_count : "";
+      recordedDateInput.value = new Date().toISOString().slice(0, 10);
+      modal.classList.remove("hidden");
+      renderChart(acc.id);
+    }
+
+    modalClose.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      activeAccountId = null;
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        activeAccountId = null;
+      }
+    });
+
+    snapshotForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!activeAccountId) return;
+      const follower_count = parseInt(followerCountInput.value, 10);
+      const recorded_at = recordedDateInput.value || new Date().toISOString().slice(0, 10);
+      if (isNaN(follower_count) || follower_count < 0) return;
+
+      if (!snapshots[activeAccountId]) {
+        snapshots[activeAccountId] = [];
+      }
+
+      // Check if snapshot for this date already exists
+      const existingIndex = snapshots[activeAccountId].findIndex(s => s.recorded_at === recorded_at);
+      if (existingIndex >= 0) {
+        snapshots[activeAccountId][existingIndex].follower_count = follower_count;
+      } else {
+        snapshots[activeAccountId].push({ follower_count, recorded_at });
+      }
+
+      // Sort by date
+      snapshots[activeAccountId].sort((a, b) => new Date(a.recorded_at) - new Date(b.recorded_at));
+
+      saveData();
+      renderChart(activeAccountId);
+      refresh();
+    });
+
+    function renderChart(accountId) {
+      const accSnapshots = snapshots[accountId] || [];
+      const labels = accSnapshots.map((s) => s.recorded_at);
+      const data = accSnapshots.map((s) => s.follower_count);
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+      const ctx = document.getElementById("chart").getContext("2d");
+      chartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Followers",
+              data,
+              borderColor: "#2d6cdf",
+              backgroundColor: "rgba(45,108,223,0.1)",
+              tension: 0.25,
+              fill: true,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: false } },
+        },
+      });
+    }
+
+    // Initialize on load
+    initData();
+    refresh();
+  </script>
+</body>
+</html>
