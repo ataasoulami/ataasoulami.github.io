@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Moroccan Value Investors — MVI</title>
   <link rel="icon" type="image/png" href="MVI.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -16,10 +17,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Shared blood-orange palette sampled from the hero portrait. */
     :root {
-      --orange: #F97316;
-      --orange-dark: #EA580C;
-      --orange-light: #FFF7ED;
+      --orange: #C85158;
+      --orange-dark: #A43D45;
+      --orange-light: #FBEDEE;
       --black: #0F0F0F;
       --white: #FFFFFF;
       --gray: #6B7280;
@@ -91,17 +93,13 @@
       fill: currentColor;
     }
 
+    /* Make the outer container span the viewport so section backgrounds can be full-bleed.
+       Individual sections keep their own inner padding to control readable measure. */
     .container {
       width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 64px 24px 80px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
+      max-width: none;
+      margin: 0;
+      padding: 0;
     }
 
     /* Back link */
@@ -125,41 +123,453 @@
       fill: currentColor;
     }
 
-    /* Header */
-    .header {
-      margin-bottom: 32px;
+    /* Hero establishes the warm editorial frame for the identity statement. */
+    /* Full-bleed hero background that keeps inner content padded. */
+    .hero {
+      width: 100vw;
+      margin: 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: clamp(48px, 8vw, 104px) clamp(24px, 6vw, 88px);
+      background: var(--gray-light);
+      min-height: 500px;
+      position: relative;
     }
 
-    .badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
+    /* Hero copy keeps the headline and supporting line visually grouped. */
+    .hero-content {
+      width: 75%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Eyebrow uses the existing orange brand color for positioning context. */
+    .hero-eyebrow {
+      margin-bottom: 20px;
       color: var(--orange);
-      background: var(--orange-light);
-      border: 1px solid #FED7AA;
-      border-radius: 99px;
-      padding: 4px 12px;
-      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    h1 {
-      font-family: 'Poppins', sans-serif;
-      font-size: clamp(26px, 5vw, 38px);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1.15;
+    /* Hero headline uses a high-contrast serif for the requested Didone-inspired tone. */
+    .hero h1 {
+      margin-bottom: 24px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.75rem, 6vw, 5.2rem);
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      line-height: 0.98;
+    }
+
+    /* Final headline words echo the blood-orange detail in the portrait. */
+    .hero h1 .accent {
+      color: var(--orange);
+    }
+
+    /* Hero subtitle gives the positioning statement a restrained reading width. */
+    .hero .subtitle {
+      max-width: 500px;
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Hero image lets the transparent portrait blend directly into the light background. */
+    .hero-photo {
+      width: 420px;
+      height: auto;
+      max-height: 620px;
+      object-fit: contain;
+      object-position: center;
+      mix-blend-mode: multiply;
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    /* Philosophy band begins at the portrait edge while keeping its own breathing room. */
+    /* Full-bleed orange band that visually connects to the hero image. */
+    .philosophy-section {
+      width: 100vw;
+      margin: -75px 0 96px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 36px clamp(24px, 6vw, 88px) 44px;
+      background: var(--orange);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Philosophy eyebrow keeps the section introduction legible on blood orange. */
+    .philosophy-eyebrow {
+      margin-bottom: 16px;
+      color: var(--orange-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Philosophy intro provides a single enlarged editorial line without the removed heading. */
+    .philosophy-intro {
+      max-width: none;
+      margin-bottom: 32px;
+      color: var(--white);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(0.3rem, 1vw, 1rem);
+      font-weight: 600;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    /* Philosophy grid presents the three principles without boxes or diagram shapes. */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      position: relative;
+    }
+
+    /* Desktop thread quietly connects the three principles. */
+    .philosophy-grid::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* Philosophy steps keep each principle airy and equal in width. */
+    .philosophy-step {
+      position: relative;
+      padding-right: clamp(24px, 4vw, 64px);
+      text-align: left;
+    }
+
+    /* Numerals anchor each principle with the shared orange identity. */
+    .philosophy-number {
+      position: relative;
+      z-index: 1;
+      width: max-content;
+      margin: 0 0 22px;
+      padding: 0 12px 0 0;
+      background: var(--orange);
+      color: var(--white);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    /* Step icons sit beside the bold principle titles. */
+    .philosophy-icon {
+      width: 28px;
+      height: 28px;
+      margin: 0;
+      color: var(--orange-light);
+      stroke-width: 1.7;
+      display: block;
+    }
+
+    /* Philosophy title row places the icon directly to the left of the label. */
+    .philosophy-title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 12px;
     }
 
-    h1 span { color: var(--orange); }
+    /* Philosophy titles provide the bold step labels in the orange band. */
+    .philosophy-title {
+      margin: 0;
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
 
-    .subtitle {
+    /* Descriptions use a restrained light measure below each title. */
+    .philosophy-description {
+      max-width: 220px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
       font-size: 15px;
-      color: var(--gray);
       line-height: 1.6;
-      max-width: 560px;
+    }
+
+    /* Desktop arrows provide a quiet typographic progression cue. */
+    .philosophy-arrow {
+      position: absolute;
+      top: 22px;
+      right: 12px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* Pain points section creates a quiet light pause after the orange philosophy band. */
+    /* Pain points should also span edge-to-edge while keeping centered inner measure. */
+    .pain-points-section {
+      width: 100vw;
+      margin: -32px 0 32px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 24px clamp(24px, 6vw, 88px) 0;
+      background: var(--white);
+    }
+
+    /* Pain points content keeps the emotional sequence centered and readable. */
+    .pain-points-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Pain points eyebrow uses the established orange editorial label treatment. */
+    .pain-points-eyebrow {
+      margin-bottom: 16px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Pain points heading creates a direct mirror before the sequential list. */
+    .pain-points-heading {
+      margin-bottom: 56px;
+      color: var(--black);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.05;
+    }
+
+    /* Pain-point heading accent echoes the hero and philosophy blood orange. */
+    .pain-points-heading .accent {
+      color: var(--orange);
+    }
+
+    /* Pain points list keeps the sequence plain without bullets or decorative boxes. */
+    .pain-points-list {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* Pain point item gives each statement room to land before the next one. */
+    .pain-point {
+      max-width: 900px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    /* Pain point summary creates the clickable disclosure row without a bullet marker. */
+    .pain-point-summary {
+      cursor: pointer;
+      list-style: none;
+    }
+
+    /* Pain point summary removes the browser disclosure triangle. */
+    .pain-point-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Pain point headline matches the expanded example text while staying bold. */
+    .pain-point-title {
+      margin: 0;
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    /* Pain point body appears only when its disclosure is opened. */
+    .pain-point-body {
+      max-width: 600px;
+      margin-top: 12px;
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* Final pain point uses a quiet orange-tinted rule to mark opportunity cost. */
+    .pain-point.urgent {
+      padding-top: 32px;
+      border-top: 1px solid #E8C8CB;
+      border-bottom-color: #E8C8CB;
+    }
+
+    /* Pain points transition creates a deliberate pause before the next section. */
+    .pain-points-transition {
+      margin: 24px auto 0;
+      color: var(--orange);
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    /* Help section reuses the hero width while separating the next decision point. */
+    /* Help section full-bleed to match other bands. */
+    .help-section {
+      width: 100vw;
+      margin: -40px 0 96px;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 0 clamp(24px, 6vw, 88px);
+    }
+
+    /* Prevent accidental horizontal scroll from positioned elements (hero image offsets). */
+    body { overflow-x: hidden; }
+
+    /* Help eyebrow uses the shared orange accent and existing uppercase treatment. */
+    .help-eyebrow {
+      margin-bottom: 16px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Help heading creates a clear section-level hierarchy below the hero. */
+    .help-heading {
+      max-width: none;
+      margin-bottom: 36px;
+      color: var(--black);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(0.7rem, 2.75vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    /* Help heading accent matches the blood-orange hero phrase. */
+    .help-heading .accent {
+      color: var(--orange);
+      white-space: nowrap;
+    }
+
+    /* Generic card grid supports future two-card sections elsewhere on the page. */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    /* Generic info card gives both visitor paths equal visual weight and height. */
+    .info-card {
+      min-height: 320px;
+      padding: 32px;
+      background: var(--white);
+      border: 1px solid #E8DADC;
+      border-left: 4px solid var(--orange);
+      border-radius: 4px 18px 4px 18px;
+      box-shadow: 8px 8px 0 var(--orange-light);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Card intro keeps the icon beside the title and body to save vertical space. */
+    .info-card-intro {
+      display: block;
+    }
+
+    /* Card heading row centers the icon against the bold title only. */
+    .info-card-heading {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Card icon aligns each visitor path with the shared orange identity. */
+    .info-card-icon {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      margin-top: 2px;
+      color: var(--orange);
+      stroke-width: 1.8;
+    }
+
+    /* Embedded video keeps the beginner lesson available without leaving the page. */
+    .help-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-top: 16px;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(15, 15, 15, 0.08);
+    }
+
+    /* Card videos share one stable ratio so both embeds align across the grid. */
+    .info-card .help-video {
+      flex-shrink: 0;
+    }
+
+    /* Embedded video frame fills its responsive presentation area. */
+    .help-video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Card title provides a compact, confident entry point for each audience. */
+    .info-card-title {
+      display: flex;
+      align-items: center;
+      min-height: calc(2 * 1.2em);
+      margin-bottom: 0;
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    /* Card body keeps the explanation readable and muted. */
+    .info-card-body {
+      display: -webkit-box;
+      min-height: calc(3 * 1.65em);
+      margin-top: 0;
+      overflow: hidden;
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.65;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
+
+    /* Card link anchors the next action at the bottom of every equal-height card. */
+    .info-card-link {
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--orange);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* Card link hover adds a restrained interaction cue without shifting the layout. */
+    .info-card-link:hover {
+      color: var(--orange-dark);
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     /* Social proof bar */
@@ -220,7 +630,7 @@
 
     /* Promise */
     .promise-block {
-      background: linear-gradient(135deg, var(--orange) 0%, #FF8C42 100%);
+      background: var(--orange);
       border-radius: 20px;
       padding: 40px 32px;
       margin-bottom: 40px;
@@ -519,7 +929,7 @@
     }
 
     .back { animation: fadeUp 0.4s ease both; }
-    .header { animation: fadeUp 0.4s ease 0.05s both; }
+    .hero { animation: fadeUp 0.4s ease 0.05s both; }
     .stats-bar { animation: fadeUp 0.4s ease 0.1s both; }
     .promise-block { animation: fadeUp 0.4s ease 0.15s both; }
     .video-wrap { animation: fadeUp 0.4s ease 0.2s both; }
@@ -527,8 +937,168 @@
     .cta-section { animation: fadeUp 0.4s ease 0.3s both; }
     .cedar-block { animation: fadeUp 0.4s ease 0.35s both; }
 
+    /* Tablet and mobile stack the hero content before the portrait. */
+    @media (max-width: 1024px) {
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero-content {
+        width: auto;
+        max-width: 700px;
+      }
+
+      .hero-photo {
+        width: min(100%, 560px);
+        max-height: none;
+        justify-self: center;
+        position: static;
+        transform: none;
+      }
+
+      /* Tablet keeps the philosophy top padding while meeting the larger portrait. */
+      .philosophy-section {
+        width: min(720px, calc(100vw - 48px));
+        margin: -61px auto 80px;
+        padding: 28px 24px 32px;
+      }
+
+      /* Tablet stacks philosophy principles into a centered sequence. */
+      .philosophy-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 48px;
+      }
+
+      /* Tablet replaces the horizontal thread with the vertical sequence. */
+      .philosophy-grid::before {
+        display: none;
+      }
+
+      /* Tablet uses centered step content without desktop side padding. */
+      .philosophy-step {
+        width: min(100%, 360px);
+        padding-right: 0;
+        text-align: left;
+      }
+
+      /* Tablet keeps the intro on one line without overflow. */
+      .philosophy-intro {
+        font-size: 0.7rem;
+      }
+
+      /* Tablet adds subtle downward connectors between stacked principles. */
+      .philosophy-step:not(:last-child)::after {
+        content: '↓';
+        position: absolute;
+        top: calc(100% + 16px);
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 18px;
+        line-height: 24px;
+        transform: translateX(-50%);
+        border-left: 1px solid rgba(255, 255, 255, 0.35);
+      }
+
+      /* Tablet keeps pain points within the same centered reading measure. */
+      .pain-points-section {
+        width: min(720px, calc(100vw - 48px));
+        margin: 0 auto 27px;
+        padding: 18px 24px 0;
+      }
+
+      /* Tablet keeps the equal two-card grid while using the available page width. */
+      .card-grid {
+        gap: 16px;
+      }
+
+      /* Tablet trims card padding slightly to protect readable body text. */
+      .info-card {
+        padding: 28px;
+      }
+
+      /* Tablet keeps the icon-text relationship compact beside narrower copy. */
+      .info-card-heading {
+        gap: 16px;
+      }
+    }
+
     /* Mobile */
     @media (max-width: 480px) {
+      .hero {
+        width: 100%;
+        margin-top: 12px;
+        margin-left: 0;
+        margin-bottom: 0;
+        padding: 24px 24px 28px;
+      }
+
+      /* Mobile keeps pain-point pacing spacious without crowding the viewport. */
+      .pain-points-section {
+        width: 100%;
+        margin-bottom: 21px;
+        padding: 16px 12px 0;
+      }
+
+      /* Mobile gives the longer pain-point heading a compact readable scale. */
+      .pain-points-heading {
+        font-size: 2.15rem;
+        margin-bottom: 40px;
+      }
+
+      /* Mobile shortens inter-item pacing while preserving separation. */
+      .pain-points-list {
+        gap: 36px;
+      }
+
+      /* Mobile keeps the headline readable when the longest title needs to wrap. */
+      .pain-point-title {
+        white-space: normal;
+      }
+
+      /* Mobile keeps the philosophy top padding and meets the portrait exactly. */
+      .philosophy-section {
+        width: 100%;
+        margin-top: -56px;
+        margin-bottom: 64px;
+        padding: 24px 24px 28px;
+      }
+
+      /* Mobile keeps the enlarged intro on one line within the narrow shell. */
+      .philosophy-intro {
+        font-size: 0.3rem;
+      }
+
+      /* Mobile returns the reusable card grid to a single comfortable column. */
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Mobile lets the help section use the page shell without wide-hero offsets. */
+      .help-section {
+        width: 100%;
+        margin: -16px 0 64px;
+        padding: 0 24px;
+      }
+
+      /* Mobile keeps the section heading strong without competing with the hero. */
+      .help-heading {
+        font-size: 0.75rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        letter-spacing: -1.5px;
+      }
+
+      .hero .subtitle {
+        font-size: 16px;
+      }
+
       .stats-bar {
         flex-direction: column;
         gap: 18px;
@@ -570,10 +1140,134 @@
       Retour
     </a>
 
-    <div class="header">
-      <div class="badge">Communauté · Investissement</div>
-      <h1>Moroccan Value <span>Investors</span></h1>
-      <p class="subtitle">Pour les Marocains qui veulent construire une vraie richesse, de manière simple et patiente.</p>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Investisseur · Éducateur financier</div>
+        <h1>Aider les Marocains<br />à atteindre la<br /><span class="accent">liberté financière</span></h1>
+        <p class="subtitle">Reprenez le contrôle de votre argent et construisez un patrimoine sur le long terme</p>
+      </div>
+      <img class="hero-photo" src="AtaaSoulamiHero.png" alt="Ataa Soulami, investisseur et éducateur financier" />
+    </section>
+
+    <section class="philosophy-section" aria-labelledby="philosophy-heading">
+      <div class="philosophy-eyebrow">Ma philosophie d'investissement</div>
+      <p class="philosophy-intro" id="philosophy-heading">En réalité, construire un patrimoine à long terme repose sur 3 étapes tellement simples, pourtant peu de gens les exécutent.</p>
+
+      <div class="philosophy-grid">
+        <article class="philosophy-step">
+          <div class="philosophy-number">1</div>
+          <div class="philosophy-title-row">
+            <i class="philosophy-icon" data-lucide="wallet" aria-hidden="true"></i>
+            <h3 class="philosophy-title">Dépenses maîtrisées</h3>
+          </div>
+          <p class="philosophy-description">Dégage un excédent de cash chaque mois.</p>
+          <span class="philosophy-arrow" aria-hidden="true">→</span>
+        </article>
+        <article class="philosophy-step">
+          <div class="philosophy-number">2</div>
+          <div class="philosophy-title-row">
+            <i class="philosophy-icon" data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
+            <h3 class="philosophy-title">Investis bien</h3>
+          </div>
+          <p class="philosophy-description">Des entreprises de qualité, à bon prix.</p>
+          <span class="philosophy-arrow" aria-hidden="true">→</span>
+        </article>
+        <article class="philosophy-step">
+          <div class="philosophy-number">3</div>
+          <div class="philosophy-title-row">
+            <i class="philosophy-icon" data-lucide="hourglass" aria-hidden="true"></i>
+            <h3 class="philosophy-title">Sois patient</h3>
+          </div>
+          <p class="philosophy-description">Laisse la magie opérer.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="pain-points-section" aria-labelledby="pain-points-heading">
+      <div class="pain-points-inner">
+        <div class="pain-points-eyebrow">Est-ce que ça te parle ?</div>
+        <h2 class="pain-points-heading" id="pain-points-heading">Si tu te reconnais dans au moins un de ces points, <span class="accent">ce n'est pas un hasard.</span></h2>
+
+        <div class="pain-points-list">
+          <details class="pain-point">
+            <summary class="pain-point-summary"><h3 class="pain-point-title">Ton argent dort et perd de la valeur</h3></summary>
+            <p class="pain-point-body">10 000 Dhs sur un compte courant depuis 10 ans ? Avec une inflation moyenne de 5%/an, ce montant ne vaut plus aujourd'hui que l'équivalent d'environ 6 100 Dhs en pouvoir d'achat réel. Tu n'as rien dépensé — et pourtant tu as perdu près de 4 000 Dhs.</p>
+          </details>
+
+          <details class="pain-point">
+            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu investis au hasard, sur des tuyaux</h3></summary>
+            <p class="pain-point-body">Un ami te partage une action « qui va exploser » sur WhatsApp. Tu achètes sans comprendre l'entreprise. Trois mois plus tard, tu as perdu 15% et tu ne sais même pas pourquoi tu y avais cru.</p>
+          </details>
+
+          <details class="pain-point">
+            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu ne sais pas analyser les états financiers d'une entreprise</h3></summary>
+            <p class="pain-point-body">Tu entends parler de Marsa Maroc ou d'Akdital, mais entre le chiffre d'affaires, les marges, la dette et les ratios de valorisation, tu ne sais pas ce qui compte vraiment — alors tu investis à l'aveugle, ou tu n'investis pas du tout.</p>
+          </details>
+
+          <details class="pain-point">
+            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu es seul face à tes décisions financières</h3></summary>
+            <p class="pain-point-body">Personne autour de toi ne parle sérieusement d'investissement. Pas de famille, pas d'amis avec qui challenger une idée ou juste poser une question sans te sentir jugé — alors tu gardes tes doutes pour toi, et tu n'avances pas.</p>
+          </details>
+
+          <details class="pain-point urgent">
+            <summary class="pain-point-summary"><h3 class="pain-point-title">Le coût de l'inaction</h3></summary>
+            <p class="pain-point-body">Pendant que tu hésites, le temps travaille contre toi. 10 000 Dhs investis début 2023 dans Managem valent aujourd'hui (juillet 2026) plus de 100 000 Dhs. Dans Marsa Maroc, plus de 30 000 Dhs. Chaque année que tu attends, c'est une année de croissance composée que tu ne récupéreras jamais.</p>
+          </details>
+        </div>
+
+        <p class="pain-points-transition">Alors, par où commencer ?</p>
+      </div>
+    </section>
+
+    <section class="help-section" aria-labelledby="help-heading">
+      <div class="help-eyebrow">Par où commencer ?</div>
+      <h2 class="help-heading" id="help-heading">Où que tu en sois, il y a un <span class="accent">point de départ</span> pour toi.</h2>
+
+      <div class="card-grid">
+        <article class="info-card">
+          <div class="info-card-intro">
+            <div class="info-card-heading">
+              <i class="info-card-icon" data-lucide="play-circle" aria-hidden="true"></i>
+              <h3 class="info-card-title">Tu débutes de zéro</h3>
+            </div>
+            <p class="info-card-body">Commence par les bases. Cette vidéo t'explique simplement comment fonctionne l'investissement, sans jargon et sans prise de tête.</p>
+          </div>
+          <div class="help-video">
+            <iframe
+              src="https://www.youtube.com/embed/UYSZfcEllVU"
+              title="Introduction à l'investissement"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a class="info-card-link" href="https://youtu.be/UYSZfcEllVU?si=i_zvCxc9WZGny2My" target="_blank" rel="noopener">Regarder la vidéo →</a>
+        </article>
+
+        <article class="info-card">
+          <div class="info-card-intro">
+            <div class="info-card-heading">
+              <i class="info-card-icon" data-lucide="trending-up" aria-hidden="true"></i>
+              <h3 class="info-card-title">Tu investis déjà mais tu es perdu ?</h3>
+            </div>
+            <p class="info-card-body">Rejoins Moroccan Value Investors (MVI), la communauté qui t'aide à structurer ta réflexion et à analyser les entreprises comme un investisseur discipliné.</p>
+          </div>
+          <div class="help-video">
+            <iframe
+              src="https://www.youtube.com/embed/V22pq8RcS9s"
+              title="Moroccan Value Investors Community"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a class="info-card-link" href="#mvi-section">Découvrir MVI →</a>
+        </article>
+      </div>
+
+    </section>
+
+    <div class="promise-block" id="mvi-section">
+      <div class="section-title">Notre promesse</div>
+      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
     </div>
 
     <div class="stats-bar">
@@ -591,20 +1285,6 @@
         <div class="stat-number">2</div>
         <div class="stat-label">Lives par mois</div>
       </div>
-    </div>
-
-    <div class="promise-block">
-      <div class="section-title">Notre promesse</div>
-      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
-    </div>
-
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/V22pq8RcS9s"
-        title="Moroccan Value Investors Community"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
     </div>
 
     <div class="description">
@@ -736,6 +1416,8 @@
         }
       });
     });
+
+    lucide.createIcons();
   </script>
 </body>
 </html>
