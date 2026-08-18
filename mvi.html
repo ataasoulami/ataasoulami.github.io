@@ -369,7 +369,8 @@
     }
 
     .pain-points-inner {
-      max-width: 1020px;
+      max-width: 1280px;
+      width: calc(100% - clamp(48px, 8vw, 176px));
       margin: 0 auto;
     }
 
@@ -429,7 +430,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 20px 22px;
+      padding: 10px 22px;
       cursor: pointer;
       list-style: none;
       color: var(--white);
@@ -453,12 +454,32 @@
     }
 
     @media (min-width: 1024px) {
+      .pain-points-section {
+        padding-left: clamp(18px, 2vw, 32px);
+        padding-right: clamp(18px, 2vw, 32px);
+      }
+
+      .pain-points-inner {
+        width: min(1280px, calc(100vw - clamp(52px, 5vw, 100px)));
+      }
+
+      .pain-point-summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 18px;
+        align-items: center;
+        width: 100%;
+        padding: 9px 20px;
+      }
+
       .pain-point-title {
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: clamp(1rem, 1.2vw, 1.5rem);
       }
 
       .pain-points-transition {
-        font-size: clamp(2rem, 2.2vw, 2.7rem);
+        font-size: clamp(2.4rem, 3.1vw, 3.5rem);
       }
     }
 
@@ -479,12 +500,22 @@
     }
 
     .pain-point-body {
-      max-width: 760px;
+      max-width: none;
+      width: 100%;
       margin: 0;
-      padding: 0 22px 22px;
+      padding: 0 22px 11px;
       color: rgba(255, 255, 255, 0.86);
       font-size: 15px;
       line-height: 1.7;
+    }
+
+    @media (min-width: 1024px) {
+      .pain-point-body {
+        width: 100%;
+        max-width: none;
+        font-size: clamp(1rem, 1.2vw, 1.5rem);
+        line-height: 1.7;
+      }
     }
 
     .pain-point.urgent {
@@ -492,12 +523,38 @@
     }
 
     .pain-points-transition {
-      margin: 24px auto 0;
-      color: var(--orange-light);
+      width: 100vw;
+      margin: 24px 0 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 28px clamp(24px, 6vw, 88px);
+      background: var(--white);
+      color: var(--orange);
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 18px;
       font-weight: 600;
       line-height: 1.4;
       text-align: center;
+      white-space: nowrap;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    @media (min-width: 1024px) {
+      .pain-points-transition {
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        font-weight: 700;
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pain-points-transition {
+        margin-top: 18px;
+        padding: 20px 24px;
+        font-size: 1.3rem;
+      }
     }
 
     /* Help section reuses the hero width while separating the next decision point. */
@@ -1135,6 +1192,8 @@
       .pain-points-transition {
         margin-bottom: 0;
         padding-bottom: 12px;
+        font-size: 1.35rem;
+        white-space: nowrap;
       }
 
       /* Mobile shortens inter-item pacing while preserving separation. */
