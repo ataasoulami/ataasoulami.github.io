@@ -1222,7 +1222,7 @@
 
       /* Mobile keeps the enlarged intro on one line within the narrow shell. */
       .philosophy-intro {
-        font-size: 15px;
+        font-size: 17px;
         line-height: 1.7;
         white-space: normal;
       }
@@ -1251,6 +1251,17 @@
       .philosophy-step:nth-child(3) .philosophy-title::before {
         content: '3. ';
         color: var(--orange);
+      }
+
+      /* Mobile hides the arrows next to steps */
+      .philosophy-arrow {
+        display: none;
+      }
+
+      /* Mobile optimizes description width and font size */
+      .philosophy-description {
+        max-width: none;
+        font-size: 16px;
       }
 
       /* Mobile lets the help section use the page shell without wide-hero offsets. */
