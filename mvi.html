@@ -183,7 +183,13 @@
 
     @media (max-width: 600px) {
       .hero h1 {
-        font-size: clamp(2.75rem, 12vw, 4rem);
+        max-width: 360px;
+        font-size: clamp(2.5rem, 11vw, 3.8rem);
+        line-height: 1;
+      }
+
+      .hero h1 .hero-line {
+        white-space: nowrap;
       }
 
       .hero h1 .hero-line-desktop {
@@ -1200,10 +1206,10 @@
         <div class="hero-eyebrow">Investisseur · Éducateur financier</div>
         <h1>
           <span class="hero-line hero-line-desktop">Aider les Marocains</span>
-          <span class="hero-line hero-line-mobile">Aider les</span>
-          <span class="hero-line hero-line-mobile">Marocains</span>
+          <span class="hero-line hero-line-mobile">Aider les Marocains</span>
           <span class="hero-line hero-line-desktop">à atteindre la <span class="accent">liberté financière</span></span>
-          <span class="hero-line hero-line-mobile">à atteindre la <span class="accent">liberté financière</span></span>
+          <span class="hero-line hero-line-mobile">à atteindre la</span>
+          <span class="hero-line hero-line-mobile"><span class="accent">liberté financière</span></span>
         </h1>
         <p class="subtitle">Reprenez le contrôle de votre argent et construisez un patrimoine sur le long terme</p>
       </div>
