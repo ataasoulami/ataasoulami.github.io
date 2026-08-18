@@ -382,6 +382,13 @@
       text-transform: uppercase;
     }
 
+    @media (min-width: 481px) {
+      .pain-points-section {
+        margin-top: 0;
+        padding-top: 28px;
+      }
+    }
+
     .pain-points-heading {
       margin-bottom: 56px;
       color: var(--white);
@@ -426,6 +433,7 @@
       cursor: pointer;
       list-style: none;
       color: var(--white);
+      min-width: 0;
     }
 
     .pain-point-summary::-webkit-details-marker {
@@ -434,12 +442,24 @@
 
     .pain-point-title {
       margin: 0;
+      flex: 1 1 auto;
+      min-width: 0;
       color: var(--white);
       font-family: 'Poppins', sans-serif;
       font-size: clamp(1.15rem, 1.7vw, 1.65rem);
       font-weight: 800;
       line-height: 1.45;
       white-space: normal;
+    }
+
+    @media (min-width: 1024px) {
+      .pain-point-title {
+        white-space: nowrap;
+      }
+
+      .pain-points-transition {
+        font-size: clamp(2rem, 2.2vw, 2.7rem);
+      }
     }
 
     .pain-point-chevron {
@@ -1103,13 +1123,18 @@
         width: 100%;
         margin-top: 0;
         margin-bottom: 0;
-        padding: 16px 12px 0;
+        padding: 16px 12px 28px;
       }
 
       /* Mobile gives the longer pain-point heading a compact readable scale. */
       .pain-points-heading {
         font-size: 2.15rem;
         margin-bottom: 40px;
+      }
+
+      .pain-points-transition {
+        margin-bottom: 0;
+        padding-bottom: 12px;
       }
 
       /* Mobile shortens inter-item pacing while preserving separation. */
