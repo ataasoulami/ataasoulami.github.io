@@ -1232,6 +1232,27 @@
         grid-template-columns: 1fr;
       }
 
+      /* Mobile hides the numbered circles and adds numbers to titles instead */
+      .philosophy-number {
+        display: none;
+      }
+
+      /* Mobile adds numbers before titles in orange */
+      .philosophy-step:nth-child(1) .philosophy-title::before {
+        content: '1. ';
+        color: var(--orange);
+      }
+
+      .philosophy-step:nth-child(2) .philosophy-title::before {
+        content: '2. ';
+        color: var(--orange);
+      }
+
+      .philosophy-step:nth-child(3) .philosophy-title::before {
+        content: '3. ';
+        color: var(--orange);
+      }
+
       /* Mobile lets the help section use the page shell without wide-hero offsets. */
       .help-section {
         width: 100%;
