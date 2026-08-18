@@ -167,19 +167,23 @@
       display: block;
     }
 
+    .hero h1 .hero-line-mobile {
+      display: none;
+    }
+
     @media (min-width: 768px) {
       .hero h1 {
         max-width: 520px;
-      }
-
-      .hero h1 .hero-line-mobile {
-        display: none;
       }
     }
 
     @media (max-width: 767px) {
       .hero h1 .hero-line-desktop {
         display: none;
+      }
+
+      .hero h1 .hero-line-mobile {
+        display: block;
       }
     }
 
