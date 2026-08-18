@@ -130,9 +130,9 @@
       margin: 0;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      padding: clamp(48px, 8vw, 104px) clamp(24px, 6vw, 88px);
+      padding: clamp(48px, 8vw, 104px) clamp(24px, 6vw, 88px) 0;
       background: var(--gray-light);
-      min-height: 500px;
+      min-height: 420px;
       position: relative;
     }
 
@@ -975,10 +975,10 @@
         transform: none;
       }
 
-      /* Tablet keeps the philosophy top padding while meeting the larger portrait. */
+      /* Tablet keeps the philosophy section flush against the portrait without a white gap. */
       .philosophy-section {
         width: min(720px, calc(100vw - 48px));
-        margin: -61px auto 80px;
+        margin: 0 auto 80px;
         padding: 28px 24px 32px;
       }
 
