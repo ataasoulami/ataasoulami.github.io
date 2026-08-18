@@ -163,9 +163,23 @@
       line-height: 0.98;
     }
 
+    .hero h1 .hero-line {
+      display: block;
+    }
+
     @media (min-width: 768px) {
       .hero h1 {
         max-width: 520px;
+      }
+
+      .hero h1 .hero-line-mobile {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero h1 .hero-line-desktop {
+        display: none;
       }
     }
 
@@ -1172,7 +1186,13 @@
     <section class="hero">
       <div class="hero-content">
         <div class="hero-eyebrow">Investisseur · Éducateur financier</div>
-        <h1>Aider les Marocains<br />à atteindre la <span class="accent">liberté financière</span></h1>
+        <h1>
+          <span class="hero-line hero-line-desktop">Aider les Marocains</span>
+          <span class="hero-line hero-line-mobile">Aider les</span>
+          <span class="hero-line hero-line-mobile">Marocains</span>
+          <span class="hero-line hero-line-desktop">à atteindre la <span class="accent">liberté financière</span></span>
+          <span class="hero-line hero-line-mobile">à atteindre la <span class="accent">liberté financière</span></span>
+        </h1>
         <p class="subtitle">Reprenez le contrôle de votre argent et construisez un patrimoine sur le long terme</p>
       </div>
       <img class="hero-photo" src="AtaaSoulamiHero.png" alt="Ataa Soulami, investisseur et éducateur financier" />
