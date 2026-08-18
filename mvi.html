@@ -192,23 +192,22 @@
       z-index: 0;
     }
 
-    /* Philosophy band begins at the portrait edge while keeping its own breathing room. */
-    /* Full-bleed orange band that visually connects to the hero image. */
+    /* Philosophy band uses a clean white canvas with orange accents for the editorial hierarchy. */
     .philosophy-section {
       width: 100vw;
       margin: -75px 0 96px;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       padding: 36px clamp(24px, 6vw, 88px) 44px;
-      background: var(--orange);
+      background: var(--white);
       position: relative;
       z-index: 1;
     }
 
-    /* Philosophy eyebrow keeps the section introduction legible on blood orange. */
+    /* Philosophy eyebrow keeps the section introduction legible on white. */
     .philosophy-eyebrow {
       margin-bottom: 16px;
-      color: var(--orange-light);
+      color: var(--orange);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2px;
@@ -219,7 +218,7 @@
     .philosophy-intro {
       max-width: none;
       margin-bottom: 32px;
-      color: var(--white);
+      color: var(--black);
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(0.3rem, 1vw, 1rem);
       font-weight: 600;
@@ -242,7 +241,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(200, 81, 88, 0.25);
     }
 
     /* Philosophy steps keep each principle airy and equal in width. */
@@ -259,8 +258,8 @@
       width: max-content;
       margin: 0 0 22px;
       padding: 0 12px 0 0;
-      background: var(--orange);
-      color: var(--white);
+      background: var(--white);
+      color: var(--orange);
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(3rem, 5vw, 4rem);
       font-weight: 400;
@@ -272,7 +271,7 @@
       width: 28px;
       height: 28px;
       margin: 0;
-      color: var(--orange-light);
+      color: var(--orange);
       stroke-width: 1.7;
       display: block;
     }
@@ -288,7 +287,7 @@
     /* Philosophy titles provide the bold step labels in the orange band. */
     .philosophy-title {
       margin: 0;
-      color: var(--white);
+      color: var(--black);
       font-family: 'Poppins', sans-serif;
       font-size: 21px;
       font-weight: 800;
@@ -299,7 +298,7 @@
     .philosophy-description {
       max-width: 220px;
       margin: 0;
-      color: rgba(255, 255, 255, 0.78);
+      color: var(--gray);
       font-size: 15px;
       line-height: 1.6;
     }
@@ -309,42 +308,39 @@
       position: absolute;
       top: 22px;
       right: 12px;
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(200, 81, 88, 0.7);
       font-size: 18px;
       line-height: 1;
     }
 
-    /* Pain points section creates a quiet light pause after the orange philosophy band. */
-    /* Pain points should also span edge-to-edge while keeping centered inner measure. */
+    /* Pain points section follows the same orange editorial system as the philosophy band. */
     .pain-points-section {
       width: 100vw;
       margin: -32px 0 32px;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
-      padding: 24px clamp(24px, 6vw, 88px) 0;
-      background: var(--white);
+      padding: 36px clamp(24px, 6vw, 88px) 32px;
+      background: var(--orange);
+      color: var(--white);
     }
 
-    /* Pain points content keeps the emotional sequence aligned with the surrounding sections. */
     .pain-points-inner {
-      max-width: 100%;
-      margin: 0;
+      max-width: 1020px;
+      margin: 0 auto;
     }
 
-    /* Pain points eyebrow uses the established orange editorial label treatment. */
     .pain-points-eyebrow {
       margin-bottom: 16px;
-      color: var(--orange);
+      color: var(--orange-light);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    /* Pain points heading creates a direct mirror before the sequential list. */
     .pain-points-heading {
       margin-bottom: 56px;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(2rem, 4vw, 3.25rem);
       font-weight: 700;
@@ -352,35 +348,31 @@
       line-height: 1.05;
     }
 
-    /* Pain-point heading accent echoes the hero and philosophy blood orange. */
     .pain-points-heading .accent {
-      color: var(--orange);
+      color: var(--orange-light);
     }
 
-    /* Pain points list keeps the sequence plain without bullets or decorative boxes. */
     .pain-points-list {
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
 
-    /* Pain point item gives each statement room to land before the next one. */
     .pain-point {
       width: 100%;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 18px;
-      background: var(--white);
+      background: rgba(255, 255, 255, 0.06);
       overflow: hidden;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .pain-point[open] {
-      border-color: var(--orange);
-      background: var(--orange);
-      box-shadow: 0 12px 26px rgba(200, 81, 88, 0.12);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 12px 26px rgba(77, 22, 21, 0.12);
     }
 
-    /* Pain point summary creates the clickable disclosure row without a bullet marker. */
     .pain-point-summary {
       display: flex;
       align-items: center;
@@ -389,57 +381,55 @@
       padding: 20px 22px;
       cursor: pointer;
       list-style: none;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .pain-point[open] .pain-point-summary {
-      background: var(--orange);
       color: var(--white);
     }
 
-    /* Pain point summary removes the browser disclosure triangle. */
     .pain-point-summary::-webkit-details-marker {
       display: none;
     }
 
-    /* Pain point headline matches the expanded example text while staying bold. */
     .pain-point-title {
       margin: 0;
-      color: var(--black);
+      color: var(--white);
       font-family: 'Poppins', sans-serif;
-      font-size: clamp(1.15rem, 1.6vw, 1.65rem);
+      font-size: clamp(1.15rem, 1.7vw, 1.65rem);
       font-weight: 800;
       line-height: 1.45;
       white-space: normal;
     }
 
-    .pain-point[open] .pain-point-title {
+    .pain-point-chevron {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
       color: var(--white);
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.2s ease;
     }
 
-    /* Pain point body appears only when its disclosure is opened. */
+    .pain-point[open] .pain-point-chevron {
+      transform: rotate(180deg);
+    }
+
     .pain-point-body {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0;
       padding: 0 22px 22px;
-      color: var(--gray);
+      color: rgba(255, 255, 255, 0.86);
       font-size: 15px;
       line-height: 1.7;
     }
 
-    .pain-point[open] .pain-point-body {
-      color: rgba(255, 255, 255, 0.88);
-    }
-
-    /* Final pain point keeps the same card treatment as the rest of the list. */
     .pain-point.urgent {
-      border-color: var(--border);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
-    /* Pain points transition creates a deliberate pause before the next section. */
     .pain-points-transition {
       margin: 24px auto 0;
-      color: var(--orange);
+      color: var(--orange-light);
       font-size: 18px;
       font-weight: 600;
       line-height: 1.4;
@@ -1176,6 +1166,41 @@
       <img class="hero-photo" src="AtaaSoulamiHero.png" alt="Ataa Soulami, investisseur et éducateur financier" />
     </section>
 
+    <section class="pain-points-section" aria-labelledby="pain-points-heading">
+      <div class="pain-points-inner">
+        <div class="pain-points-eyebrow">Est-ce que ça te parle ?</div>
+        <h2 class="pain-points-heading" id="pain-points-heading">Si tu te reconnais dans au moins un de ces points, <span class="accent">ce n'est pas un hasard.</span></h2>
+
+        <div class="pain-points-list">
+          <details class="pain-point">
+            <summary class="pain-point-summary">
+              <h3 class="pain-point-title">Ton argent dort et perd de la valeur</h3>
+              <svg class="pain-point-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <p class="pain-point-body">10 000 Dhs sur un compte courant depuis 10 ans ? Avec une inflation moyenne de 5%/an, ce montant ne vaut plus aujourd'hui que l'équivalent d'environ 6 100 Dhs en pouvoir d'achat réel. Tu n'as rien dépensé — et pourtant tu as perdu près de 4 000 Dhs.</p>
+          </details>
+
+          <details class="pain-point">
+            <summary class="pain-point-summary">
+              <h3 class="pain-point-title">Tu investis au hasard, sans comprendre</h3>
+              <svg class="pain-point-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <p class="pain-point-body">Un ami te partage une action « qui va exploser » sur WhatsApp. Tu achètes sans comprendre l'entreprise. Trois mois plus tard, tu as perdu 15% et tu ne sais même pas pourquoi tu y avais cru.</p>
+          </details>
+
+          <details class="pain-point urgent">
+            <summary class="pain-point-summary">
+              <h3 class="pain-point-title">Tu es seul face à tes émotions et aux mouvements du marché</h3>
+              <svg class="pain-point-chevron" viewBox="0 0 24 24" fill="none" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <p class="pain-point-body">Personne autour de toi ne parle sérieusement d'investissement. Pas de famille, pas d'amis avec qui challenger une idée ou juste poser une question sans te sentir jugé. Tu gardes tes doutes pour toi, et tu laisses l'émotion décider à ta place.</p>
+          </details>
+        </div>
+
+        <p class="pain-points-transition">Alors, par où commencer ?</p>
+      </div>
+    </section>
+
     <section class="philosophy-section" aria-labelledby="philosophy-heading">
       <div class="philosophy-eyebrow">Ma philosophie d'investissement</div>
       <p class="philosophy-intro" id="philosophy-heading">En réalité, construire un patrimoine à long terme repose sur 3 étapes tellement simples, pourtant peu de gens les exécutent.</p>
@@ -1207,42 +1232,6 @@
           </div>
           <p class="philosophy-description">Laisse la magie opérer.</p>
         </article>
-      </div>
-    </section>
-
-    <section class="pain-points-section" aria-labelledby="pain-points-heading">
-      <div class="pain-points-inner">
-        <div class="pain-points-eyebrow">Est-ce que ça te parle ?</div>
-        <h2 class="pain-points-heading" id="pain-points-heading">Si tu te reconnais dans au moins un de ces points, <span class="accent">ce n'est pas un hasard.</span></h2>
-
-        <div class="pain-points-list">
-          <details class="pain-point">
-            <summary class="pain-point-summary"><h3 class="pain-point-title">Ton argent dort et perd de la valeur</h3></summary>
-            <p class="pain-point-body">10 000 Dhs sur un compte courant depuis 10 ans ? Avec une inflation moyenne de 5%/an, ce montant ne vaut plus aujourd'hui que l'équivalent d'environ 6 100 Dhs en pouvoir d'achat réel. Tu n'as rien dépensé — et pourtant tu as perdu près de 4 000 Dhs.</p>
-          </details>
-
-          <details class="pain-point">
-            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu investis au hasard, sur des tuyaux</h3></summary>
-            <p class="pain-point-body">Un ami te partage une action « qui va exploser » sur WhatsApp. Tu achètes sans comprendre l'entreprise. Trois mois plus tard, tu as perdu 15% et tu ne sais même pas pourquoi tu y avais cru.</p>
-          </details>
-
-          <details class="pain-point">
-            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu ne sais pas analyser les états financiers d'une entreprise</h3></summary>
-            <p class="pain-point-body">Tu entends parler de Marsa Maroc ou d'Akdital, mais entre le chiffre d'affaires, les marges, la dette et les ratios de valorisation, tu ne sais pas ce qui compte vraiment — alors tu investis à l'aveugle, ou tu n'investis pas du tout.</p>
-          </details>
-
-          <details class="pain-point">
-            <summary class="pain-point-summary"><h3 class="pain-point-title">Tu es seul face à tes décisions financières</h3></summary>
-            <p class="pain-point-body">Personne autour de toi ne parle sérieusement d'investissement. Pas de famille, pas d'amis avec qui challenger une idée ou juste poser une question sans te sentir jugé — alors tu gardes tes doutes pour toi, et tu n'avances pas.</p>
-          </details>
-
-          <details class="pain-point urgent">
-            <summary class="pain-point-summary"><h3 class="pain-point-title">Le coût de l'inaction</h3></summary>
-            <p class="pain-point-body">Pendant que tu hésites, le temps travaille contre toi. 10 000 Dhs investis début 2023 dans Managem valent aujourd'hui (juillet 2026) plus de 100 000 Dhs. Dans Marsa Maroc, plus de 30 000 Dhs. Chaque année que tu attends, c'est une année de croissance composée que tu ne récupéreras jamais.</p>
-          </details>
-        </div>
-
-        <p class="pain-points-transition">Alors, par où commencer ?</p>
       </div>
     </section>
 
