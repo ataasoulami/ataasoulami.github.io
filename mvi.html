@@ -1326,6 +1326,25 @@
         width: 100%;
         text-align: center;
       }
+
+      /* Mobile adjusts info-card title to fit in 2 lines */
+      .info-card-title {
+        font-size: 16px;
+        min-height: calc(2 * 1.2em);
+      }
+
+      /* Mobile aligns icon with upper sentence */
+      .info-card-heading {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .info-card-icon {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+        margin-top: 4px;
+      }
     }
   </style>
 </head>
@@ -1439,7 +1458,7 @@
           <div class="info-card-intro">
             <div class="info-card-heading">
               <i class="info-card-icon" data-lucide="play-circle" aria-hidden="true"></i>
-              <h3 class="info-card-title">Option 1: Je debut de zero</h3>
+              <h3 class="info-card-title">Option 1: Je débute de zéro</h3>
             </div>
             <p class="info-card-body">Commence par les bases. Cette vidéo t'explique simplement comment fonctionne l'investissement, sans jargon et sans prise de tête.</p>
           </div>
@@ -1458,7 +1477,7 @@
           <div class="info-card-intro">
             <div class="info-card-heading">
               <i class="info-card-icon" data-lucide="trending-up" aria-hidden="true"></i>
-              <h3 class="info-card-title">Option 2: J'investis deja mais je suis perdu</h3>
+              <h3 class="info-card-title">Option 2: J'investis déjà mais je suis perdu</h3>
             </div>
             <p class="info-card-body">Rejoins Moroccan Value Investors (MVI), la communauté qui t'aide à structurer ta réflexion et à analyser les entreprises comme un investisseur discipliné.</p>
           </div>
