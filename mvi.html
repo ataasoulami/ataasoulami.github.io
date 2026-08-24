@@ -43,7 +43,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: var(--white);
+      background: var(--gray-light);
       border-bottom: 1px solid var(--border);
       padding: 12px 24px;
       display: flex;
@@ -153,6 +153,10 @@
       text-transform: uppercase;
     }
 
+    .hero-eyebrow-mobile {
+      display: none;
+    }
+
     /* Hero headline uses a high-contrast serif for the requested Didone-inspired tone. */
     .hero h1 {
       margin-bottom: 24px;
@@ -197,6 +201,14 @@
       }
 
       .hero h1 .hero-line-mobile {
+        display: block;
+      }
+
+      .hero-eyebrow-desktop {
+        display: none;
+      }
+
+      .hero-eyebrow-mobile {
         display: block;
       }
     }
@@ -577,11 +589,355 @@
       }
     }
 
+    /* About section keeps the dossier readable while making room for future media. */
+    .about-section {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: 0;
+      padding: 0 clamp(24px, 6vw, 88px) 88px;
+      background: var(--gray-light);
+    }
+
+    .about-inner {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+    }
+
+    .about-eyebrow {
+      margin-bottom: 14px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .about-heading {
+      margin-bottom: 18px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .about-intro {
+      max-width: 650px;
+      margin-bottom: 56px;
+      color: var(--gray);
+      font-size: 20px;
+      line-height: 1.65;
+    }
+
+    .about-dossier {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 48px;
+      margin-bottom: 72px;
+    }
+
+    .about-entry-number {
+      margin-bottom: 14px;
+      color: var(--orange);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .about-entry-title {
+      margin-bottom: 14px;
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .about-entry-body {
+      max-width: 360px;
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .about-media-heading {
+      margin: 0 0 20px;
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .about-photo-grid,
+    .about-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .about-photo-grid {
+      margin-bottom: 48px;
+    }
+
+    .about-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+      padding: 20px;
+      border: 1px dashed #B9C0C8;
+      background: #EEF0F2;
+      color: var(--gray);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* Real photo tiles use the same grid footprint as placeholders. */
+    .about-photo-card {
+      min-height: 170px;
+      border: 1px solid #E5E7EB;
+      background: #F3F4F6;
+      overflow: hidden;
+    }
+
+    .about-photo-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .about-video-placeholder {
+      aspect-ratio: 16 / 9;
+      min-height: 0;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .about-video-placeholder .video-placeholder-icon {
+      width: 34px;
+      height: 34px;
+      color: var(--orange);
+      stroke-width: 1.7;
+    }
+
+    .about-video-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .about-video-embed iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .about-section {
+        padding-top: 56px;
+      }
+
+      .about-dossier {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-photo-grid,
+      .about-video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-mvi-section {
+        padding: 10px 24px;
+      }
+
+      .why-mvi-section .section-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+      }
+
+      .why-mvi-section p {
+        margin-top: 12px;
+        font-size: 17px;
+        text-align: left;
+      }
+
+      .why-mvi-copy {
+        font-size: 17px;
+      }
+
+      .about-section {
+        padding: 48px 24px 64px;
+      }
+
+      .about-heading {
+        font-size: 2.5rem;
+      }
+
+      .about-intro {
+        margin-bottom: 44px;
+        font-size: 18px;
+      }
+
+      .about-dossier {
+        grid-template-columns: 1fr;
+        gap: 42px;
+        margin-bottom: 56px;
+      }
+
+      .about-entry-number {
+        font-size: 3.5rem;
+      }
+
+      .about-photo-grid,
+      .about-video-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-placeholder {
+        min-height: 150px;
+      }
+
+      .about-photo-card {
+        min-height: 150px;
+      }
+    }
+
+    /* Testimonials section highlights social proof with the same visual language. */
+    .testimonials-section {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 48px clamp(24px, 6vw, 88px);
+      background: var(--white);
+    }
+
+    .testimonials-inner {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+    }
+
+    .testimonials-eyebrow {
+      margin-bottom: 12px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .testimonials-heading {
+      margin-bottom: 10px;
+      color: var(--black);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      line-height: 1.15;
+    }
+
+    .testimonials-meta {
+      margin-bottom: 26px;
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .testimonials-meta a {
+      color: var(--orange);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .testimonials-meta a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 24px;
+      border: 1px solid #E8DADC;
+      border-left: 4px solid var(--orange);
+      border-radius: 4px 16px 4px 16px;
+      background: var(--gray-light);
+    }
+
+    .testimonial-rating {
+      margin-bottom: 10px;
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    .testimonial-title {
+      margin-bottom: 12px;
+      color: var(--black);
+      font-family: 'Poppins', sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .testimonial-body {
+      margin-bottom: 16px;
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .testimonial-author {
+      margin-top: auto;
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .testimonials-section {
+        padding: 32px 24px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-title {
+        font-size: 19px;
+      }
+    }
+
     /* Help section reuses the hero width while separating the next decision point. */
     /* Help section full-bleed to match other bands. */
     .help-section {
       width: 100vw;
-      margin: -40px 0 96px;
+      margin: -40px 0 0;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       padding: 56px clamp(24px, 6vw, 88px);
@@ -849,6 +1205,65 @@
       margin-bottom: 40px;
     }
 
+    /* C'est quoi MVI uses the same spacious editorial rhythm as the main bands. */
+    .why-mvi-section {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding: 14px clamp(24px, 6vw, 88px);
+      background: var(--gray-light);
+      text-align: center;
+    }
+
+    .why-mvi-section > * {
+      width: min(900px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .why-mvi-section .section-title {
+      margin-bottom: 0;
+      color: var(--orange);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .why-mvi-section p {
+      width: 100%;
+      max-width: none;
+      margin-top: 18px;
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.75;
+      text-align: left;
+    }
+
+    .why-mvi-section > p {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .why-mvi-copy {
+      width: 100%;
+      padding: 0 clamp(24px, 6vw, 88px) 28px;
+      margin: 0 auto;
+      margin-top: -28px;
+      background: var(--gray-light);
+    }
+
+    .why-mvi-copy p {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
     .divider {
       width: 40px;
       height: 3px;
@@ -870,62 +1285,120 @@
       color: #374151;
     }
 
-    /* What you get */
+    /* What you get adopts the same orange section language as other key bands. */
     .benefits {
-      background: var(--gray-light);
-      border-radius: 16px;
-      padding: 28px;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: -28px;
+      padding: 40px clamp(24px, 6vw, 88px) 56px;
+      background: var(--orange);
+      border-radius: 0;
+    }
+
+    .benefits .section-title,
+    .benefits ul {
+      width: min(1280px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .benefits .section-title {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
     }
 
     .benefits ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 16px;
+      gap: 16px;
+      margin-top: 0;
     }
 
     .benefits li {
       display: flex;
-      gap: 12px;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #374151;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.94);
     }
 
     .benefits li .num {
       flex-shrink: 0;
-      width: 26px;
-      height: 26px;
-      background: var(--orange);
-      color: white;
-      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      background: var(--white);
+      color: var(--orange);
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      margin-top: 1px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-top: 2px;
     }
 
     /* FAQ */
+    .faq {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-bottom: 0;
+      padding: 56px clamp(24px, 6vw, 88px) 40px;
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .faq > * {
+      width: min(1280px, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq .divider {
+      width: 42px;
+      height: 3px;
+      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 999px;
+    }
+
+    .faq .section-title {
+      margin-bottom: 20px;
+      color: var(--white);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
     .faq-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 16px;
+      margin-top: 0;
     }
 
     .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 16px;
+      background-color: rgba(200, 81, 88, 0.14);
       overflow: hidden;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
     }
 
-    .faq-item.open {
-      border-color: var(--orange);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    .faq-item.faq-open {
+      border-color: rgba(17, 24, 39, 0.08);
+      background-color: #f3f4f6;
+      box-shadow: 0 10px 24px rgba(113, 39, 0, 0.12);
     }
 
     .faq-question {
@@ -934,32 +1407,37 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 16px 20px;
-      background: var(--white);
+      padding: 20px 22px;
+      background: transparent;
       border: none;
       text-align: left;
       font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--black);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--white);
       cursor: pointer;
     }
 
-    .faq-item.open .faq-question {
-      color: var(--orange-dark);
+    .faq-item.faq-open .faq-question {
+      color: #111827 !important;
+    }
+
+    .faq-item.faq-open .faq-icon {
+      color: #111827 !important;
     }
 
     .faq-icon {
       width: 18px;
       height: 18px;
       flex-shrink: 0;
-      color: var(--gray);
+      color: rgba(255, 255, 255, 0.8);
       transition: transform 0.25s ease, color 0.2s ease;
     }
 
-    .faq-item.open .faq-icon {
+    .faq-item.faq-open .faq-icon {
       transform: rotate(180deg);
-      color: var(--orange);
+      color: #111827 !important;
     }
 
     .faq-answer {
@@ -969,10 +1447,38 @@
     }
 
     .faq-answer p {
-      padding: 0 20px 18px;
-      font-size: 14px;
-      line-height: 1.65;
+      padding: 0 22px 22px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .faq-item.faq-open .faq-answer p {
       color: #374151;
+    }
+
+    @media (max-width: 700px) {
+      .faq {
+        padding: 40px 24px 24px;
+      }
+
+      .cta-headline {
+        width: 100% !important;
+        font-size: 1.05rem !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.2px !important;
+        white-space: nowrap !important;
+      }
+
+      .faq-question {
+        padding: 18px 18px;
+        font-size: 1rem;
+      }
+
+      .faq-answer p {
+        padding: 0 18px 18px;
+        font-size: 15px;
+      }
     }
 
     /* Cedar symbol */
@@ -994,25 +1500,38 @@
 
     /* CTA */
     .cta-section {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      margin-top: -40px;
+      margin-bottom: 0;
+      padding: 0 clamp(24px, 6vw, 88px) 0;
       text-align: center;
       background: var(--gray-light);
-      border-radius: 16px;
-      padding: 40px 28px;
-      margin-bottom: 32px;
+      border-radius: 0;
+    }
+
+    .cta-section > * {
+      width: min(1280px, 100%);
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-headline {
-      font-family: 'Poppins', sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      color: var(--black);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 3.2vw, 2.9rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
     }
 
     .cta-subline {
-      font-size: 15px;
-      color: var(--gray);
-      line-height: 1.6;
       margin-bottom: 28px;
+      color: var(--gray);
+      font-size: 18px;
+      line-height: 1.6;
     }
 
     .cta-btn {
@@ -1144,7 +1663,10 @@
         text-align: left;
       }
 
-      /* Tablet keeps the intro on one line without overflow. */\n      .philosophy-intro {\n        font-size: clamp(1rem, 1.2vw, 1.5rem);\n      }
+      /* Tablet keeps the intro on one line without overflow. */
+      .philosophy-intro {
+        font-size: clamp(1rem, 1.2vw, 1.5rem);
+      }
 
       /* Tablet adds subtle downward connectors between stacked principles. */
       .philosophy-step:not(:last-child)::after {
@@ -1186,12 +1708,56 @@
 
     /* Mobile */
     @media (max-width: 480px) {
+      .benefits {
+        padding: 30px 24px 44px;
+      }
+
+      .benefits .section-title {
+        margin-bottom: 16px;
+        font-size: 1.45rem;
+        white-space: nowrap;
+      }
+
+      .benefits li {
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .benefits li .num {
+        width: 28px;
+        height: 28px;
+      }
+
+      .why-mvi-section {
+        padding: 10px 24px;
+      }
+
+      .why-mvi-section .section-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+      }
+
+      .why-mvi-section p {
+        margin-top: 12px;
+        font-size: 17px;
+        text-align: left;
+      }
+
+      .why-mvi-copy {
+        width: 100%;
+        padding: 0 24px 20px;
+      }
+
+      .why-mvi-copy p {
+        font-size: 17px;
+      }
+
       .hero {
         width: 100%;
         margin-top: 12px;
         margin-left: 0;
         margin-bottom: 0;
-        padding: 24px 24px 0;
+        padding: 48px 24px 0;
       }
 
       /* Mobile keeps pain-point pacing spacious without crowding the viewport. */
@@ -1288,13 +1854,18 @@
       /* Mobile lets the help section use the page shell without wide-hero offsets. */
       .help-section {
         width: 100%;
-        margin: -16px 0 64px;
-        padding: 0 24px;
+        margin: -16px 0 0;
+        padding: 0 24px 24px;
+      }
+
+      .help-eyebrow {
+        padding-top: 24px;
       }
 
       /* Mobile keeps the section heading strong without competing with the hero. */
       .help-heading {
-        font-size: 0.75rem;
+        font-size: 17px;
+        line-height: 1.7;
       }
 
       .hero h1 {
@@ -1318,7 +1889,17 @@
       }
 
       .cta-section {
-        padding: 32px 20px;
+        padding: 32px 24px;
+        text-align: left;
+      }
+
+      .cta-headline {
+        width: 100%;
+        font-size: clamp(1.05rem, 6vw, 1.5rem) !important;
+        line-height: 1.2 !important;
+        letter-spacing: -0.2px !important;
+        text-align: left;
+        white-space: nowrap !important;
       }
 
       .cta-btn {
@@ -1368,12 +1949,15 @@
 
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-eyebrow">Investisseur · Éducateur financier</div>
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-desktop">Ataa Soulami · Consultant en Stratégie · Investisseur · Éducateur financier</span>
+          <span class="hero-eyebrow-mobile">Ataa Soulami · Consultant en Stratégie<br />Investisseur · Éducateur financier</span>
+        </div>
         <h1>
-          <span class="hero-line hero-line-desktop">Aider les Marocains</span>
-          <span class="hero-line hero-line-mobile">Aider les Marocains</span>
+          <span class="hero-line hero-line-desktop"><span class="accent">Ma mission:</span> Aider les Marocains</span>
+          <span class="hero-line hero-line-mobile"><span class="accent">Ma mission:</span> Aider les</span>
+          <span class="hero-line hero-line-mobile">Marocains à atteindre la</span>
           <span class="hero-line hero-line-desktop">à atteindre la <span class="accent">liberté financière</span></span>
-          <span class="hero-line hero-line-mobile">à atteindre la</span>
           <span class="hero-line hero-line-mobile"><span class="accent">liberté financière</span></span>
         </h1>
         <p class="subtitle">Reprenez le contrôle de votre argent et construisez un patrimoine sur le long terme</p>
@@ -1450,7 +2034,7 @@
     </section>
 
     <section class="help-section" aria-labelledby="help-heading">
-      <div class="help-eyebrow">ok, je dois investir, mais par où commencer?</div>
+      <div class="help-eyebrow">C'est clair, mais comment investir?</div>
       <h2 class="help-heading" id="help-heading">Selon ta situation, il y a un <span class="accent">point de départ</span> pour toi.</h2>
 
       <div class="card-grid">
@@ -1479,7 +2063,7 @@
               <i class="info-card-icon" data-lucide="trending-up" aria-hidden="true"></i>
               <h3 class="info-card-title">Option 2: J'investis déjà mais je suis perdu</h3>
             </div>
-            <p class="info-card-body">Rejoins Moroccan Value Investors (MVI), la communauté qui t'aide à structurer ta réflexion et à analyser les entreprises comme un investisseur discipliné.</p>
+            <p class="info-card-body">Dans ce cas, découvre MVI (Moroccan Value Investors), la communauté qui t'aide à structurer ta réflexion et à analyser les entreprises comme un investisseur discipliné.</p>
           </div>
           <div class="help-video">
             <iframe
@@ -1495,37 +2079,14 @@
 
     </section>
 
-    <div class="promise-block" id="mvi-section">
-      <div class="section-title">Notre promesse</div>
-      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-number">100+</div>
-        <div class="stat-label">Membres actifs</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-number">7</div>
-        <div class="stat-label">jours · satisfait ou remboursé</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-number">2</div>
-        <div class="stat-label">Lives par mois</div>
-      </div>
-    </div>
-
     <div class="description">
 
-      <div>
-        <div class="divider"></div>
-        <div class="section-title">Pourquoi MVI ?</div>
+      <div class="why-mvi-section">
+        <div class="section-title">C'est quoi MVI ?</div>
         <p>Tu veux commencer à investir sans raccourcis, sans hype, sans spéculation ? MVI est la communauté pour les Marocains qui veulent construire une vraie richesse, de manière simple et patiente. L'objectif est d'investir sur le long terme, avec discipline, en t'appuyant sur des principes solides et une bonne compréhension des entreprises.</p>
       </div>
 
-      <div>
+      <div class="why-mvi-copy">
         <p>Nous avons créé MVI parce qu'investir au Maroc peut être une expérience solitaire. Les bonnes discussions sont rares et dispersées entre des groupes WhatsApp, des cafés ou quelques échanges sur LinkedIn. Les voix les plus visibles sont souvent celles qui promettent des gains rapides ou suivent les tendances. Pendant ce temps, ceux qui veulent construire sérieusement sur le long terme n'ont pas vraiment d'endroit pour apprendre ensemble et avancer.</p>
       </div>
 
@@ -1550,6 +2111,39 @@
           </li>
         </ul>
       </div>
+
+      <section class="testimonials-section" aria-labelledby="testimonials-heading">
+        <div class="testimonials-inner">
+          <div class="testimonials-eyebrow">Témoignages</div>
+          <h2 class="testimonials-heading" id="testimonials-heading">Ce que disent les membres sur Trustpilot</h2>
+          <p class="testimonials-meta">
+            <a href="https://www.trustpilot.com/review/ataasoulami.com?languages=all" target="_blank" rel="noopener">Voir tous les avis</a>
+          </p>
+
+          <div class="testimonials-grid">
+            <article class="testimonial-card">
+              <div class="testimonial-rating">5 / 5</div>
+              <h3 class="testimonial-title">"Ataa and his team are knowledgeable..."</h3>
+              <p class="testimonial-body">"Ataa and his team are knowledgeable and explain everything in a clear and easy-to-understand way... I highly recommend this community to both beginners and anyone looking to improve their understanding of the Moroccan market."</p>
+              <p class="testimonial-author">Mohamed Benchekroun · Aug 1, 2026</p>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-rating">5 / 5</div>
+              <h3 class="testimonial-title">"Avis perso ☺️☺️"</h3>
+              <p class="testimonial-body">"Je suivais Ataa sur Instagram depuis un bon moment... les sujets des lives sont très intéressants, les cours sont faciles à comprendre et je suis ravie de faire partie de la communauté MVI."</p>
+              <p class="testimonial-author">Ghita Amasri · Jul 31, 2026</p>
+            </article>
+
+            <article class="testimonial-card">
+              <div class="testimonial-rating">5 / 5</div>
+              <h3 class="testimonial-title">"La communauté idéale pour débuter en bourse"</h3>
+              <p class="testimonial-body">"Des cours simplifiés, des lives interactifs avec des experts, et des réponses rapides à toutes les questions. En gros, c'est la communauté idéale pour se lancer sereinement dans l'investissement."</p>
+              <p class="testimonial-author">Maroua EL HADIBE · Jul 31, 2026</p>
+            </article>
+          </div>
+        </div>
+      </section>
 
       <div class="faq">
         <div class="divider"></div>
@@ -1603,7 +2197,7 @@
 
     <div class="cta-section">
       <div class="cta-headline">Prêt à investir sérieusement ?</div>
-      <p class="cta-subline">Rejoins 100+ Marocains qui construisent leur richesse avec patience et discipline.</p>
+      <p class="cta-subline">Rejoins 130+ Marocains qui construisent leur richesse avec patience et discipline.</p>
       <a class="cta-btn" href="https://www.societiz.com/mvi" target="_blank" rel="noopener">
         Rejoindre MVI →
       </a>
@@ -1614,6 +2208,96 @@
         </a>
       </p>
       <p class="cta-fine">Abonnement mensuel · Sans engagement · Accès immédiat</p>
+    </div>
+
+    <section class="about-section" aria-labelledby="about-heading">
+      <div class="about-inner">
+        <div class="about-eyebrow">À propos</div>
+        <h2 class="about-heading" id="about-heading">Qui est Ataa Soulami</h2>
+        <p class="about-intro">Ancien consultant chez McKinsey, aujourd'hui investisseur et éducateur financier, Ataa aide les Marocains à mieux comprendre l'investissement et à prendre en main leur avenir financier.</p>
+
+        <div class="about-dossier">
+          <article class="about-entry">
+            <div class="about-entry-number">01</div>
+            <h3 class="about-entry-title">Stratège</h3>
+            <p class="about-entry-body">Ataa a travaillé plusieurs années chez McKinsey &amp; Company, où il aidait les entreprises à transformer leur stratégie en résultats concrets. Ce travail lui a appris à comprendre comment une entreprise fonctionne vraiment : son activité, ses chiffres, et ce qui la rend solide ou fragile. Cette expérience est aujourd'hui au cœur de sa façon d'investir.</p>
+          </article>
+
+          <article class="about-entry">
+            <div class="about-entry-number">02</div>
+            <h3 class="about-entry-title">Investisseur</h3>
+            <p class="about-entry-body">Depuis près de 10 ans, Ataa investit à la Bourse de Casablanca et sur les marchés internationaux. Sa méthode est simple : comprendre une entreprise avant d'y placer son argent, être patient, et éviter la spéculation.</p>
+          </article>
+
+          <article class="about-entry">
+            <div class="about-entry-number">03</div>
+            <h3 class="about-entry-title">Voix publique</h3>
+            <p class="about-entry-body">Ataa touche plus de 200 000 personnes à travers ses différents réseaux. Sa mission : rendre l'investissement plus simple et plus accessible pour les Marocains. Il est intervenu dans des écoles comme l'ESSEC Business School et l'Université Al Akhawayn, a animé des masterclasses en entreprise, et a été invité dans des podcasts comme Next Wave.</p>
+          </article>
+        </div>
+
+        <div class="about-media-group">
+          <h3 class="about-media-heading">En images</h3>
+          <div class="about-photo-grid">
+            <!-- photo conférence ESSEC -->
+            <div class="about-photo-card"><img src="1776197123516.jpeg" alt="Ataa Soulami à l'ESSEC Business School" /></div>
+            <!-- photo masterclass en amphithéâtre -->
+            <div class="about-photo-card"><img src="1776251446577.jpeg" alt="Ataa Soulami pendant une masterclass" /></div>
+            <!-- photo interview Detafour / GITEX -->
+            <div class="about-photo-card"><img src="Detafour interview.jpg" alt="Interview d'Ataa Soulami à GITEX Africa" /></div>
+            <!-- photo interview LODJ Talk -->
+            <div class="about-photo-card"><img src="LODJ interview.jpg" alt="Ataa Soulami invité sur LODJ Talk" /></div>
+            <!-- placeholder: photo Bourse de Casablanca -->
+            <div class="about-placeholder">Photo à venir</div>
+            <!-- placeholder: photo communauté MVI -->
+            <div class="about-placeholder">Photo à venir</div>
+          </div>
+        </div>
+
+        <div class="about-media-group">
+          <h3 class="about-media-heading">À découvrir en vidéo</h3>
+          <div class="about-video-grid">
+            <div class="about-placeholder about-video-placeholder about-video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/ybp3HENSnLw"
+                title="Vidéo d'Ataa Soulami"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="about-placeholder about-video-placeholder about-video-embed">
+              <iframe
+                src="https://www.youtube.com/embed/YT3lQR768k0"
+                title="Vidéo d'Ataa Soulami"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="promise-block" id="mvi-section">
+      <div class="section-title">Notre promesse</div>
+      <p>Passe en <strong>90 jours</strong> de débutant perdu à investisseur discipliné, capable d'analyser et de décider seul.</p>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Membres actifs</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number">7</div>
+        <div class="stat-label">jours · satisfait ou remboursé</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number">2</div>
+        <div class="stat-label">Lives par mois</div>
+      </div>
     </div>
 
     <div class="cedar-block">
@@ -1635,13 +2319,22 @@
       btn.addEventListener('click', function () {
         var item = btn.closest('.faq-item');
         var answer = item.querySelector('.faq-answer');
-        var isOpen = item.classList.contains('open');
+        var icon = item.querySelector('.faq-icon');
+        var isOpen = item.classList.contains('faq-open');
 
         if (isOpen) {
+          item.classList.remove('faq-open');
           item.classList.remove('open');
+          item.style.setProperty('background-color', 'rgba(200, 81, 88, 0.14)', 'important');
+          btn.style.setProperty('color', '#ffffff', 'important');
+          if (icon) icon.style.setProperty('color', '#ffffff', 'important');
           answer.style.maxHeight = null;
         } else {
+          item.classList.add('faq-open');
           item.classList.add('open');
+          item.style.setProperty('background-color', '#f3f4f6', 'important');
+          btn.style.setProperty('color', '#111827', 'important');
+          if (icon) icon.style.setProperty('color', '#111827', 'important');
           answer.style.maxHeight = answer.scrollHeight + 'px';
         }
       });
