@@ -1346,6 +1346,15 @@
       text-align: center;
     }
 
+    /* Desktop keeps the benefits introduction on a single confident line. */
+    @media (min-width: 900px) {
+      .benefits-heading,
+      .benefits-intro {
+        max-width: none;
+        white-space: nowrap;
+      }
+    }
+
     .benefits-list {
       display: flex;
       flex-direction: column;
@@ -1416,7 +1425,7 @@
       display: block;
       width: 100%;
       aspect-ratio: 16 / 9;
-      height: auto;
+      height: 100%;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -1835,11 +1844,12 @@
       }
 
       .benefits-heading {
-        font-size: 2rem;
+        font-size: 1.55rem;
       }
 
       .benefits-intro {
-        font-size: 16px;
+        font-size: 15px;
+        line-height: 1.6;
       }
 
       .benefits-list {
