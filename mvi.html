@@ -432,8 +432,8 @@
     }
 
     .pain-point[open] {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.4);
+      background: #f3f4f6;
+      border-color: rgba(17, 24, 39, 0.08);
       box-shadow: 0 12px 26px rgba(77, 22, 21, 0.12);
     }
 
@@ -510,6 +510,7 @@
 
     .pain-point[open] .pain-point-chevron {
       transform: rotate(180deg);
+      color: #111827;
     }
 
     .pain-point-body {
@@ -520,6 +521,18 @@
       color: rgba(255, 255, 255, 0.86);
       font-size: 15px;
       line-height: 1.7;
+    }
+
+    .pain-point[open] .pain-point-summary {
+      color: #111827;
+    }
+
+    .pain-point[open] .pain-point-title {
+      color: #111827;
+    }
+
+    .pain-point[open] .pain-point-body {
+      color: #374151;
     }
 
     @media (min-width: 1024px) {
@@ -1285,64 +1298,173 @@
       color: #374151;
     }
 
-    /* What you get adopts the same orange section language as other key bands. */
+    /* Benefits section uses alternating rows to make each outcome easy to scan. */
     .benefits {
       width: 100vw;
       margin-left: calc(50% - 50vw);
       margin-right: calc(50% - 50vw);
       margin-top: -28px;
-      padding: 40px clamp(24px, 6vw, 88px) 56px;
+      padding: 72px clamp(24px, 6vw, 88px) 80px;
       background: var(--orange);
       border-radius: 0;
     }
 
-    .benefits .section-title,
-    .benefits ul {
+    .benefits-inner {
       width: min(1280px, 100%);
       margin-left: auto;
       margin-right: auto;
     }
 
-    .benefits .section-title {
-      margin-bottom: 20px;
+    .benefits-eyebrow {
+      margin-bottom: 14px;
+      color: var(--orange-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .benefits-heading {
+      max-width: 760px;
+      margin: 0 auto 16px;
       color: var(--white);
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(2rem, 3.2vw, 2.9rem);
       font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.5px;
+      text-align: center;
     }
 
-    .benefits ul {
-      list-style: none;
+    .benefits-intro {
+      max-width: 600px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 17px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .benefits-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      margin-top: 0;
+      gap: 72px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(251, 237, 238, 0.55);
     }
 
-    .benefits li {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      font-size: 17px;
+    .feature-row {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: clamp(36px, 7vw, 112px);
+    }
+
+    .feature-row--reverse .feature-row-media {
+      order: -1;
+    }
+
+    .feature-row-copy {
+      max-width: 520px;
+    }
+
+    .feature-row-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 18px;
+      color: var(--orange-light);
+      stroke-width: 2;
+    }
+
+    .feature-row-title {
+      margin-bottom: 14px;
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .feature-row-body {
+      margin-bottom: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
       line-height: 1.75;
-      color: rgba(255, 255, 255, 0.94);
     }
 
-    .benefits li .num {
-      flex-shrink: 0;
-      width: 30px;
-      height: 30px;
+    .feature-row-features {
+      color: var(--orange-light);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .feature-row-media {
+      min-width: 0;
+      padding: 10px;
       background: var(--white);
-      color: var(--orange);
-      border-radius: 6px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 18px 42px rgba(17, 24, 39, 0.1);
+      overflow: hidden;
+    }
+
+    .feature-row-media img,
+    .feature-row-placeholder {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .feature-row-media img {
+      transition: transform 0.3s ease;
+    }
+
+    .feature-row-media:hover img {
+      transform: scale(1.02);
+    }
+
+    .feature-row-placeholder {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
+      border: 1px dashed var(--border);
+      background: var(--gray-light);
+      color: var(--gray);
+      font-size: 15px;
+      font-weight: 700;
       margin-top: 2px;
+    }
+
+    /* Mobile keeps every feature in the same text-then-image reading order. */
+    @media (max-width: 899px) {
+      .benefits {
+        padding-top: 56px;
+        padding-bottom: 64px;
+      }
+
+      .benefits-list {
+        gap: 56px;
+        margin-top: 48px;
+      }
+
+      .feature-row,
+      .feature-row--reverse {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .feature-row--reverse .feature-row-media {
+        order: 0;
+      }
+
+      .feature-row-copy {
+        max-width: none;
+      }
     }
 
     /* FAQ */
@@ -1709,23 +1831,20 @@
     /* Mobile */
     @media (max-width: 480px) {
       .benefits {
-        padding: 30px 24px 44px;
+        padding: 52px 24px 60px;
       }
 
-      .benefits .section-title {
-        margin-bottom: 16px;
-        font-size: 1.45rem;
-        white-space: nowrap;
+      .benefits-heading {
+        font-size: 2rem;
       }
 
-      .benefits li {
+      .benefits-intro {
         font-size: 16px;
-        line-height: 1.7;
       }
 
-      .benefits li .num {
-        width: 28px;
-        height: 28px;
+      .benefits-list {
+        gap: 52px;
+        margin-top: 44px;
       }
 
       .why-mvi-section {
@@ -2019,7 +2138,7 @@
             <i class="philosophy-icon" data-lucide="chart-no-axes-combined" aria-hidden="true"></i>
             <h3 class="philosophy-title">Investis le reliquat</h3>
           </div>
-          <p class="philosophy-description">Prends l'excédent et épargne-le intelligemment. Investis en bourse avec une stratégie solide — des titres de qualité à des valuations raisonnables, pas des spéculations.</p>
+          <p class="philosophy-description">Prends l'excédent et épargne-le intelligemment. Investis en bourse avec une stratégie solide — des titres de qualité à des valorisations raisonnables, pas des spéculations.</p>
           <span class="philosophy-arrow" aria-hidden="true">→</span>
         </article>
         <article class="philosophy-step">
@@ -2090,27 +2209,63 @@
         <p>Nous avons créé MVI parce qu'investir au Maroc peut être une expérience solitaire. Les bonnes discussions sont rares et dispersées entre des groupes WhatsApp, des cafés ou quelques échanges sur LinkedIn. Les voix les plus visibles sont souvent celles qui promettent des gains rapides ou suivent les tendances. Pendant ce temps, ceux qui veulent construire sérieusement sur le long terme n'ont pas vraiment d'endroit pour apprendre ensemble et avancer.</p>
       </div>
 
-      <div class="benefits">
-        <div class="section-title">Ce que tu obtiens en rejoignant</div>
-        <ul>
-          <li>
-            <div class="num">1</div>
-            <span>Une formation claire et structurée sur le value investing et l'analyse fondamentale, adaptée au Maroc.</span>
-          </li>
-          <li>
-            <div class="num">2</div>
-            <span>Une communauté de membres qui pensent long terme — sans discussions spéculatives ni promesses irréalistes.</span>
-          </li>
-          <li>
-            <div class="num">3</div>
-            <span>Des sessions de questions-réponses avec des professionnels marocains de la finance et de l'investissement.</span>
-          </li>
-          <li>
-            <div class="num">4</div>
-            <span>Des rencontres et des événements pour tisser des liens dans le monde "réel".</span>
-          </li>
-        </ul>
-      </div>
+      <section class="benefits" aria-labelledby="benefits-heading">
+        <div class="benefits-inner">
+          <div class="benefits-eyebrow">Ce que tu obtiens</div>
+          <h2 class="benefits-heading" id="benefits-heading">Tout ce dont tu as besoin pour investir sereinement</h2>
+          <p class="benefits-intro">Pas juste des cours. Un système complet pour apprendre, analyser et décider — entouré d'une communauté qui pense long terme.</p>
+
+          <div class="benefits-list">
+            <article class="feature-row">
+              <div class="feature-row-copy">
+                <i class="feature-row-icon" data-lucide="graduation-cap" aria-hidden="true"></i>
+                <h3 class="feature-row-title">Une formation complète, pensée pour le Maroc</h3>
+                <p class="feature-row-body">Des modules progressifs qui te prennent par la main : du mindset de l'investisseur à la lecture des états financiers, jusqu'à l'analyse complète d'une entreprise cotée. Simple, concret, et accessible dès ton premier jour.</p>
+                <div class="feature-row-features">Modules progressifs · Suivi de progression · Accessible dès le Jour 1</div>
+              </div>
+              <div class="feature-row-media">
+                <img src="mvi-formation.png" alt="La formation MVI organisée en chapitres avec suivi de progression" />
+              </div>
+            </article>
+
+            <article class="feature-row feature-row--reverse">
+              <div class="feature-row-copy">
+                <i class="feature-row-icon" data-lucide="bar-chart-3" aria-hidden="true"></i>
+                <h3 class="feature-row-title">On analyse de vraies entreprises marocaines</h3>
+                <p class="feature-row-body">Managem, Marsa Maroc, T2S, Mutandis... Chaque mois, on décortique ensemble une entreprise cotée à la Bourse de Casablanca. Et c'est toi qui votes pour choisir la prochaine analyse.</p>
+                <div class="feature-row-features">Analyses en direct · Entreprises de la BVC · Choisies par les membres</div>
+              </div>
+              <div class="feature-row-media">
+                <img src="mvi-poll.png" alt="Sondage communautaire pour choisir la prochaine entreprise analysée en live" />
+              </div>
+            </article>
+
+            <article class="feature-row">
+              <div class="feature-row-copy">
+                <i class="feature-row-icon" data-lucide="play-circle" aria-hidden="true"></i>
+                <h3 class="feature-row-title">Regarde l'intérieur d'une vraie leçon</h3>
+                <p class="feature-row-body">Chaque leçon va droit au but : des slides clairs, des exemples concrets, et des outils comme idbourse.com pour passer de la théorie à la pratique. Rien de flou, rien de survolé.</p>
+                <div class="feature-row-features">Vidéos structurées · Exemples réels · Replays classés par thème</div>
+              </div>
+              <div class="feature-row-media">
+                <img src="mvi-lesson.png" alt="Exemple de leçon MVI sur la lecture du rapport annuel" />
+              </div>
+            </article>
+
+            <article class="feature-row feature-row--reverse">
+              <div class="feature-row-copy">
+                <i class="feature-row-icon" data-lucide="users" aria-hidden="true"></i>
+                <h3 class="feature-row-title">Une communauté pour progresser ensemble</h3>
+                <p class="feature-row-body">Investir peut être solitaire — pas ici. Échange avec des membres qui pensent long terme, pose tes questions sans te sentir jugé, et profite d'analyses de portefeuilles de membres pour apprendre de décisions réelles et progresser avec le groupe.</p>
+                <div class="feature-row-features">Communauté active · Analyse de portefeuilles · Entraide au quotidien</div>
+              </div>
+              <div class="feature-row-media">
+                <img src="portfolio.png" alt="Analyse du portefeuille d'un membre de la communauté MVI" />
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
       <section class="testimonials-section" aria-labelledby="testimonials-heading">
         <div class="testimonials-inner">
